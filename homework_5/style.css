@@ -90,7 +90,7 @@ body {
 }
 
 .button-small-white {
-	width: 130px;
+	width: 120px;
 	height: 36px;
 	color: #4E5457;
 	font-family: 'Roboto';
@@ -99,33 +99,71 @@ body {
 	padding: 10px, 5px;
 	margin-bottom: 5px;
 	border-radius: 40px;
-	border: none;
+	border: none
+}
+
+.button-small-white-border {
+	width: 120px;
+	height: 36px;
+	color: #4E5457;
+	font-family: 'Roboto';
+	font-size: 14px;
+	background-color: white;
+	padding: 10px, 5px;
+	margin-bottom: 5px;
+	border-radius: 40px;
+	border: none
+}
+
+.button-small-white-border:hover {
+	width: 120px;
+	height: 36px;
+	color: #4E5457;
+	font-family: 'Roboto';
+	font-size: 14px;
+	background-color: white;
+	padding: 10px, 5px;
+	margin-bottom: 5px;
+	border-radius: 40px;
+	border: 1px solid #D43E3C;
 }
 
 .button-small-white:hover {
-	width: 130px;
+	width: 120px;
 	height: 36px;
 	color: #4E5457;
 	font-family: 'Roboto';
 	font-size: 14px;
-	background-color: white;
+	background-color: #F3F3F3;
 	padding: 10px, 5px;
 	margin-bottom: 5px;
 	border-radius: 40px;
-	border: 3px #D43E3C;
 }
 
 .button-small-gray {
 	width: 110px;
 	height: 36px;
-	color: white;
+	color: #4E5457;
 	font-family: 'Roboto';
 	font-size: 14px;
+	background-color: #DEE4E8;
+	padding: 10px, 5px;
+	border-radius: 40px;
+	border: none;
+}
+
+.button-medium {
+	width: 150px;
+	height: 45px;
+	color: white;
+	font-family: 'Roboto';
+	font-size: 18px;
 	background-color: #D43E3C;
 	padding: 10px, 5px;
 	border-radius: 40px;
 	border: none;
 }
+
 
 .button-large {
 	width: 180px;
@@ -185,6 +223,12 @@ body {
 	color: #4E5457;
 }
 
+.button-label{
+	font-family: 'Roboto';
+	font-size: 14px;
+	color: #4E5457;
+}
+
 .text-body-coral {
 	font-family: 'Roboto';
 	font-size: 20px;
@@ -218,7 +262,7 @@ body {
 }
 
 /*First Section: Welcome message */
-.box1 {
+#box1 {
 	height: 520px;
 	padding-top: 40px;
 	padding-bottom: 30px;
@@ -246,7 +290,7 @@ h1 {
 }
 
 /* Second Section: Flavors */
-.box2 {
+#box2 {
 	height: 340px;
 	background-color: white;
 	padding-top: 20px;
@@ -269,7 +313,7 @@ h1 {
 
 /* Third Section: Local Ingredients */
 
-.box3 {
+#box3 {
 	height: 300px;
 	padding-top: 40px;
 	padding-left: 210px;
@@ -294,7 +338,7 @@ h1 {
 }
 
 /* Fourth Section: Popular Items */
-.box4 {
+#box4 {
 	height: 550px;
 	padding-top: 40px;
 	padding-right: 210px;
@@ -358,7 +402,7 @@ h1 {
 }
 
 /* Fifth Section: About Us */
-.box5 {
+#box5 {
 	height: 320px;
 	padding-top: 10px;
 	background-color: #DEE4E8;
@@ -370,7 +414,7 @@ h1 {
 }
 
 /* Sixth Section: Visit Us */
-.box6 {
+#box6 {
 	height: 450px;
 	padding-top: 40px;
 	padding-left: 210px;
@@ -384,9 +428,9 @@ h1 {
 
 .visit-grid {
 	display: grid;
-	grid-template-columns: 200px 200px 250px;
+	grid-template-columns: 190px 190px 250px;
 	grid-template-areas: 'hours' 'address' 'contact';
-	grid-gap: 50px;
+	grid-gap: 25px;
 }
 
 #hours {
@@ -477,14 +521,13 @@ h1 {
 /* Elements for product detail page (product.html) only */
 .product-details-grid {
 	display: grid;
-	grid-template-columns: 20% 50%;
+	grid-template-columns: 20% 55%;
 	grid-template-rows: 100px 100px 100px;
 	grid-template-areas: 'product-image' 'description';
 	grid-gap: 100px;
 	padding: 20px;
 	margin-left: 210px;
 }
-
 
 .description {
 	grid-area: 'description';
@@ -515,16 +558,106 @@ h1 {
 }
 
 .dropdown-menu {
-	/*display: none;*/
+	display: none;
 	background: white;
 	width: 80px;
 	box-shadow: 0px 1px 1px #BCC1C3;
-	padding-left: 20px;
 	margin-left: 15px;
 	margin-top: 2px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 
 }
 
-.dropdown:hover .dopdown-content {
+/*.dropdown:hover .dopdown-menu {
 	display: block;
+}*/
+
+.menu-list {
+	list-style-type: none;
+	margin: 0;
+	width: 130;
+	padding-left: 15px;
+	line-height: 120%;
+}
+
+.menu-list-item {
+	padding-bottom: 8px;
+}
+
+#dropdown-icon {
+	width: 12px;
+	height: 7px;
+	padding-left: 2px;
+}
+
+.button-cart {
+	width: 150px;
+	height: 45px;
+	color: white;
+	font-family: 'Roboto';
+	font-size: 18px;
+	background-color: #9BA0A2;
+	padding: 10px, 5px;
+	border-radius: 40px;
+	border: none;
+	margin-top: 25px;
+	margin-bottom: 10px;
+}
+
+.reviews-grid {
+	display: grid;
+	grid-template-columns: 40% 55%;
+	grid-template-rows: 480px;
+	grid-template-areas: 'reviews-left' 'reviews-right';
+	grid-gap: 10px;
+	padding-top: 20px;
+	padding-left: 50px;
+	padding-right: 50px;
+	margin-left: 210px;
+	margin-right: 190px;
+	margin-bottom: 20px;
+	background-color: #EFF3F6;
+}
+
+.reviews-left {
+	grid-area: 'reviews-left';
+}
+
+.reviews-right {
+	grid-area: 'reviews-right';
+}
+
+.ratings-total {
+	width: 100px;
+	height: 20px;
+	float: left;
+	padding-right: 10px;
+}
+
+.ratings-average-box {
+	margin-bottom: 30px;
+}
+
+.ratings-bar {
+	width: 150px;
+	height: 10px;
+	float: right;
+	margin-right: 170px;
+	margin-top: 5px;
+}
+
+.review-stars {
+	width: 100px;
+	height: 20px;
+	float: left;
+	margin-right: 10px;
+}
+
+.review-line {
+	background-color: #C4C4C4;
+	border: none;	
+	height: 1px;
+	margin-top: 30px;
+	margin-bottom: 30px;
 }
