@@ -72,7 +72,7 @@ body {
 	font-family: 'Roboto';
 	font-size: 14px;
 	background-color: #D43E3C;
-	padding: 10px, 5px;
+	padding: 10px 5px;
 	border-radius: 40px;
 	border: none;
 }
@@ -84,7 +84,7 @@ body {
 	font-family: 'Roboto';
 	font-size: 14px;
 	background-color: #A52F2D;
-	padding: 10px, 5px;
+	padding: 10px 5px;
 	border-radius: 40px;
 	border: none;
 }
@@ -96,33 +96,31 @@ body {
 	font-family: 'Roboto';
 	font-size: 14px;
 	background-color: white;
-	padding: 10px, 5px;
+	padding: 10px 5px;
 	margin-bottom: 5px;
 	border-radius: 40px;
 	border: none
 }
 
 .button-small-white-border {
-	width: 120px;
-	height: 36px;
+	width: 130px;
 	color: #4E5457;
 	font-family: 'Roboto';
 	font-size: 14px;
 	background-color: white;
-	padding: 10px, 5px;
+	padding: 10px 2px;
 	margin-bottom: 5px;
 	border-radius: 40px;
-	border: none
+	border: 1px solid white;
 }
 
 .button-small-white-border:hover {
-	width: 120px;
-	height: 36px;
+	width: 130px;
 	color: #4E5457;
 	font-family: 'Roboto';
 	font-size: 14px;
 	background-color: white;
-	padding: 10px, 5px;
+	padding: 10px 2px;
 	margin-bottom: 5px;
 	border-radius: 40px;
 	border: 1px solid #D43E3C;
@@ -135,7 +133,7 @@ body {
 	font-family: 'Roboto';
 	font-size: 14px;
 	background-color: #F3F3F3;
-	padding: 10px, 5px;
+	padding: 10px 5px;
 	margin-bottom: 5px;
 	border-radius: 40px;
 }
@@ -143,11 +141,11 @@ body {
 .button-small-gray {
 	width: 110px;
 	height: 36px;
-	color: #4E5457;
+	color: black;
 	font-family: 'Roboto';
 	font-size: 14px;
 	background-color: #DEE4E8;
-	padding: 10px, 5px;
+	padding: 10px 5px;
 	border-radius: 40px;
 	border: none;
 }
@@ -159,7 +157,7 @@ body {
 	font-family: 'Roboto';
 	font-size: 18px;
 	background-color: #D43E3C;
-	padding: 10px, 5px;
+	padding: 10px 5px;
 	border-radius: 40px;
 	border: none;
 }
@@ -172,7 +170,7 @@ body {
 	font-family: 'Roboto';
 	font-size: 20px;
 	background-color: #D43E3C;
-	padding: 10px, 5px;
+	padding: 10px 5px;
 	border-radius: 40px;
 	border: none;
 }
@@ -184,7 +182,7 @@ body {
 	font-family: 'Roboto';
 	font-size: 20px;
 	background-color: #A52F2D;
-	padding: 10px, 5px;
+	padding: 10px 5px;
 	border-radius: 40px;
 	border: none;
 }
@@ -254,13 +252,6 @@ body {
 
 /*Elements for home page only */
 
-/*order now button link */
-.link-order {
-	text-decoration: none;
-	color: white;
-	cursor: pointer;
-}
-
 /*First Section: Welcome message */
 #box1 {
 	height: 520px;
@@ -287,6 +278,7 @@ h1 {
 	height: 500px;
 	padding-top: 10px;
 	padding-right: 210px;
+	float: right;
 }
 
 /* Second Section: Flavors */
@@ -304,6 +296,7 @@ h1 {
 	height: 230px;
 	padding-top: 40px;
 	padding-right: 210px;
+	float: left;
 }
 
 #header2-spacing {
@@ -324,10 +317,14 @@ h1 {
 #line1 {
 	width:10%;
 	background-color: #D43E3C;
-	border-color: #D43E3C;
+	border: none;
 	border-radius: 40px;
 	height: 2px;
 	margin-top: 60px;
+	float: left;
+}
+#box3-text {
+	margin-top: 90px;
 }
 
 #Home3 {
@@ -335,6 +332,7 @@ h1 {
 	height: 310px;
 	padding-top: 30px;
 	display: inline-block;
+	float: right;
 }
 
 /* Fourth Section: Popular Items */
@@ -367,7 +365,6 @@ h1 {
 #Ratings1 {
 	width: 100px;
 }
-
 
 /* Popular Item 2 */
 #popular2 {
@@ -424,25 +421,13 @@ h1 {
 #Home7 {
 	width: 280px;
 	padding-right: 50px;
+	float: left;
 }
 
 .visit-grid {
 	display: grid;
 	grid-template-columns: 190px 190px 250px;
-	grid-template-areas: 'hours' 'address' 'contact';
 	grid-gap: 25px;
-}
-
-#hours {
-	grid-area: 'hours';
-}
-
-#address {
-	grid-area: 'address';
-}
-
-#contact {
-	grid-area: 'contact';
 }
 
 #hours-table {
@@ -462,40 +447,13 @@ h1 {
 	cursor: pointer;
 }
 
-
 .products-grid {
 	display: grid;
 	grid-template-columns: 200px 200px 200px;
 	grid-template-rows: 200px 200px;
-	grid-template-areas: 'original' 'blackberry' 'walnut'
-						 'gluten-free' 'caramel' 'pumpkin';
 	grid-gap: 110px;
 	padding: 50px;
 	justify-content: center;
-}
-
-#original {
-	grid-area: 'original';
-}
-
-#blackberry {
-	grid-area: 'blackberry';
-}
-
-#walnut {
-	grid-area: 'walnut';
-}
-
-#gluten-free {
-	grid-area: 'gluten-free';
-}
-
-#caramel {
-	grid-area: 'caramel';
-}
-
-#pumpkin {
-	grid-area: 'pumpkin';
 }
 
 .item-container {
@@ -507,8 +465,6 @@ h1 {
 }
 
 .roll-image {
-	width: 240;
-	height: 160;
 	margin-bottom: 5px;
 }
 
@@ -523,18 +479,12 @@ h1 {
 	display: grid;
 	grid-template-columns: 20% 55%;
 	grid-template-rows: 100px 100px 100px;
-	grid-template-areas: 'product-image' 'description';
 	grid-gap: 100px;
 	padding: 20px;
 	margin-left: 210px;
 }
 
-.description {
-	grid-area: 'description';
-}
-
 .product-image {
-	grid-area: 'product-image';
 	width: 250px;
 }
 
@@ -551,7 +501,7 @@ h1 {
 	font-family: 'Roboto';
 	font-size: 14px;
 	background-color: white;
-	padding: 10px, 5px;
+	padding: 10px 5px;
 	border-radius: 40px;
 	border: none;
 	display: inline-block;
@@ -575,8 +525,8 @@ h1 {
 
 .menu-list {
 	list-style-type: none;
-	margin: 0;
-	width: 130;
+	margin: 0px;
+	width: 130px;
 	padding-left: 15px;
 	line-height: 120%;
 }
@@ -598,7 +548,7 @@ h1 {
 	font-family: 'Roboto';
 	font-size: 18px;
 	background-color: #9BA0A2;
-	padding: 10px, 5px;
+	padding: 10px 5px;
 	border-radius: 40px;
 	border: none;
 	margin-top: 25px;
@@ -609,7 +559,6 @@ h1 {
 	display: grid;
 	grid-template-columns: 40% 55%;
 	grid-template-rows: 480px;
-	grid-template-areas: 'reviews-left' 'reviews-right';
 	grid-gap: 10px;
 	padding-top: 20px;
 	padding-left: 50px;
@@ -618,14 +567,6 @@ h1 {
 	margin-right: 190px;
 	margin-bottom: 20px;
 	background-color: #EFF3F6;
-}
-
-.reviews-left {
-	grid-area: 'reviews-left';
-}
-
-.reviews-right {
-	grid-area: 'reviews-right';
 }
 
 .ratings-total {
@@ -661,3 +602,33 @@ h1 {
 	margin-top: 30px;
 	margin-bottom: 30px;
 }
+
+/* Elements for About Us page (about.html) only */
+#about-grid {
+	display: grid;
+	grid-template-columns: 55% 40%;
+	margin-left:210px;
+	margin-right: 210px;
+	margin-top: 50px;
+	grid-gap: 150px;
+}
+
+#about-image {
+	width: 300px;
+	float: right;
+}
+
+#column-text {
+	margin-top: 100px;
+}
+
+#about-line {
+	width: 20%;
+	background-color: #D43E3C;
+	border: #D43E3C;
+	border-radius: 40px;
+	height: 2px;
+	margin: 0px auto 30px 0px;
+	text-align: left;
+}
+
