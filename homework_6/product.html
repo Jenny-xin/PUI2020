@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=PublicSans' rel='stylesheet'>
+	<title>Bun Bun Bakery</title>
+	</head>
+
+
+	<body id="body-gray">
+
+	<!-- Navigation Bar containing menu & logo -->
+		<div class="navbar">
+			<nav>
+				<a href="index.html"><img src="Assets/Logo.jpg" class="logo" alt="company logo"></a>
+				<a class="topnav" href="cart.html" id="cartCount">Cart</a>
+				<a class="topnav" href="order.html">Order</a>
+				<a class="topnav" href="visit.html">Visit</a>
+				<a class="topnav" href="about.html">About</a>
+			</nav>
+		</div>
+
+	<!-- Back Button -->
+			<nav>
+				<a class= "text-body2 back-label" href="order.html"><img src="Assets/Back.png" class="back-button" alt="back icon">All Flavors</a>
+			</nav>
+
+	<!-- Product Details -->
+		<div class="product-details-grid">
+			<div class="product-image">
+				<img src="Assets/Original-product.png" class="product-image" alt="one original cinnamon roll">
+			</div>
+			
+			<div>
+				<p class="header3">Original Roll</p>
+				<p class="text-body3">$2.00</p>
+				<p class="text-body3">Our famous Original Roll gives you the classic cinnamon flavor that everyone loves mixed with a hint of condensed milk sweetness. Make sure to get your hands on this warm, sugary goodness!</p>
+				
+				<!-- Glazing options -->
+				<p class="text-body2"><strong>Glazing Options (choose one):</strong></p>
+				<input type="button" value="None" class="buttonSmallWhiteBorder button-label glaze-button">
+				<input type="button" value="Sugar-Milk" class="buttonSmallWhiteBorder button-label glaze-button">
+				<input type="button" value="Vanilla-Milk" class="buttonSmallWhiteBorder button-label glaze-button">
+				<input type="button" value="Double-Chocolate" class="buttonSmallWhiteBorder button-label glaze-button">
+				
+				<!-- Quantity options -->
+				<div>
+				<div class="text-body2"><strong>Quantity</strong></div>
+					<select id="quantity" class="dropdown button-label">
+						<option disabled hidden selected>Select Option</option>
+						<option value="1" class="text-body3 menu-list-item">1 Roll</option>
+						<option value="3" class="text-body3 menu-list-item">3 Rolls</option>
+						<option value="6" class="text-body3 menu-list-item">6 Rolls</option>
+						<option value="12" class="text-body3 menu-list-item">12 Rolls</option>
+					</select>
+				</div>
+
+				<input type="button" value="Add to Cart" class="buttonCart" onclick="addToCart()">
+				<p class="text-body3">We only accept online order for Pittsburgh residents at this time.</p>
+			</div>
+		</div>
+	<!-- Reviews Section -->
+		<div class="reviews-grid">
+			<div class="reviews-left">
+				<p class="text-body2">Customer Reviews</p>
+				<div class="ratings-average-box">
+					<div>
+						<img src="Assets/Ratings1.png" class="ratings-total" alt="4.5/5 yellow stars filled in">
+					</div>
+					<div>
+						<p class="text-body3">1,230 Reviews</p>
+					</div>
+				</div>
+				
+				<div>
+					<div>
+						<img src="Assets/5-Stars.png" class="ratings-bar" alt="gray bar with 70% filled red">
+					</div>
+					<div>
+						<p class="text-body3">5 Stars</p>
+					</div>
+				</div>
+
+				<div>
+					<div>
+						<img src="Assets/4-Stars.png" class="ratings-bar" alt="gray bar with 15% filled red">
+					</div>
+					<div>
+						<p class="text-body3">4 Stars</p>
+					</div>
+				</div>
+
+				<div>
+					<div>
+						<img src="Assets/3-Stars.png" class="ratings-bar" alt="gray bar with 10% filled red">
+					</div>
+					<div>
+						<p class="text-body3">3 Stars</p>
+					</div>
+				</div>
+
+				<div>
+					<div>
+						<img src="Assets/2-Stars.png" class="ratings-bar" alt="gray bar with 5% filled red">
+					</div>
+					<div>
+						<p class="text-body3">2 Stars</p>
+					</div>
+				</div>
+
+				<div>
+					<div>
+						<img src="Assets/1-Star.png" class="ratings-bar" alt="gray bar with 0% filled red">
+					</div>
+					<div>
+						<p class="text-body3">1 Star</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="reviews-right">
+				<p class="text-body3">Top Reviews</p>
+				<div>
+					<p class="text-body">Great taste</p>
+					<div>
+						<img src="Assets/Individual-Rating.png" class="review-stars" alt="five yellow stars">
+						<p class=text-body3>rachel_k | 9/23/20</p>
+					</div>
+					<p class="text-body2">I love the original flavor, super soft and gooey, satisfies my sweet tooth every time!</p>
+					<hr class="review-line">
+				</div>
+
+				<div>
+					<p class="text-body">Just Perfect</p>
+					<div>
+						<img src="Assets/Individual-Rating.png" class="review-stars" alt="five yellow stars">
+						<p class=text-body3>jordan16 | 8/14/20</p>
+					</div>
+					<p class="text-body2">You can never go wrong with the original, perfect balance of everything! The PERFECT cinnamon roll.</p>
+					<hr class="review-line">
+				</div>
+
+				<button class="button-small-white button-label">Load More (2)</button>
+			</div>
+		</div>
+
+		<script type ="text/javascript" src="main.js"></script>
+	</body>
+</html>
