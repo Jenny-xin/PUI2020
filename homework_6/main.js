@@ -31,7 +31,7 @@ function glazeClickHandler() {
 	
 glazeClickHandler()
 
-
+// create new Rolls object with new quantity and glaze values
 function addToCart() {
 	var quantity = document.getElementById('quantity').value;
 	var quantityNum = parseInt(quantity)
@@ -43,6 +43,7 @@ function addToCart() {
 	updateCart(cartArray.length)
 }
 
+// update items in cart
 function updateCart() {
 	var cartCount = document.getElementById('cartCount');
 	if (cartArray.length > 0) {
