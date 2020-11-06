@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="main.js"></script>
+	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=PublicSans' rel='stylesheet'>
+	<title>Bun Bun Bakery</title>
+	</head>
+
+
+	<body id="body-gray" onload="loadCart()">
+
+	<!-- Navigation Bar containing menu & logo -->
+		<div class="navbar">
+			<nav>
+				<a href="index.html"><img src="Assets/Logo.jpg" class="logo" alt="company logo"></a>
+				<a class="topnav" href="cart.html" id="cartCount">Cart</a>
+				<a class="topnav" href="order.html">Order</a>
+				<a class="topnav" href="visit.html">Visit</a>
+				<a class="topnav" href="about.html">About</a>
+			</nav>
+		</div>
+
+	<!-- Back Button -->
+			<nav>
+				<a class= "text-body2 back-label" href="order.html"><img src="Assets/Back.png" class="back-button" alt="back icon">Continue Shopping</a>
+			</nav>
+
+	<!-- Cart -->
+		<div>
+			<p class="header3 align-center" id="itemCount"><b>Cart (3 items)</b></p>
+			<p class="text-body3 align-center">Estimated 3-5 Day Shipping on all items in Pittsburgh area only</p>
+		
+		<div id=cart-container>
+
+			<div id="cart-items">
+
+		<!-------------- Cart item template ------------->
+				<div class="item">
+					<div>
+						<img src="Assets/Original-product.png" class="item-img">
+					</div>
+
+					<div class="item-box-flex-items">
+						<div>
+							<p class=text-body2><b>Original Roll</b></p>
+							<p class=text-body3 id="itemGlaze">Sugar-milk glazing</p>
+
+							<select class="item-dropdown" id="itemQuant">
+								<option value="1" class="text-body3 menu-list-item">Qty: 1 Roll</option>
+								<option value="3" class="text-body3 menu-list-item">Qty: 3 Rolls</option>
+								<option value="6" class="text-body3 menu-list-item">Qty: 6 Rolls</option>
+								<option value="12" class="text-body3 menu-list-item">Qty: 12 Rolls</option>
+							</select>
+						</div>
+
+						<div class="item-box-price">
+							<p class="text-body2 total-price"><b>$12.00</b><span class="text-body3">&nbsp total</span></p>
+							
+							<p class="text-body3">$2.00 each</p>
+
+							<input type="button" value="Delete this Item" class="deleteBtn">
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+			<!--------- Order Summary section ---------->
+
+			<div id="order-summary">
+				<p class=text-body2><span class="middle-align"><b>Order Summary</b></span></p>
+				<div>
+					<p class="text-body3">Promo Code/Gift Card</p>
+					<input type="text" id="promo">
+					<input type="button" value="Apply" id="promoBtn">
+				</div>
+
+				<hr class="order-line">
+
+				<div id="subtotal-flex-container">
+					<div id="order-labels">
+						<p class="text-body3"><b>Subtotal</b></p>
+						<p class="text-body3"><b>Estimated Shipping</b></p>
+						<p class="text-body3"><b>Tax</b></p>
+					</div>
+
+					<div id="order-price">
+						<p class="text-body3">$23.00</p>
+						<p class="text-body3">$2.99</p>
+						<p class="text-body3">$1.61</p>
+					</div>
+				</div>
+
+				<hr class="order-line">
+
+				<div id="total-flex-container">
+					<div id="total-label">
+						<p class="text-body2"><b>Order Total</b></p>
+					</div>
+					<div id="total-price">
+						<p class="text-body2"><b>$27.60</b></p>
+					</div>
+				</div>
+
+				<input type="button" value="Check Out" id="checkOutBtn" class="button-large align-center">
+
+			</div>
+		</div>
+	</body>
+</html>
