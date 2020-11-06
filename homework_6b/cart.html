@@ -3,14 +3,13 @@
 	<head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<script src="main.js"></script>
 	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 	<link href='https://fonts.googleapis.com/css?family=PublicSans' rel='stylesheet'>
 	<title>Bun Bun Bakery</title>
 	</head>
 
 
-	<body id="body-gray" onload="loadCart()">
+	<body id="body-gray" onload="loadCart()" onbeforeunload="return saveCart()">
 
 	<!-- Navigation Bar containing menu & logo -->
 		<div class="navbar">
@@ -89,9 +88,9 @@
 					</div>
 
 					<div id="order-price">
-						<p class="text-body3">$23.00</p>
+						<p class="text-body3" id="subtotal">$0.00</p>
 						<p class="text-body3">$2.99</p>
-						<p class="text-body3">$1.61</p>
+						<p class="text-body3" id="tax">$0.00</p>
 					</div>
 				</div>
 
@@ -102,7 +101,7 @@
 						<p class="text-body2"><b>Order Total</b></p>
 					</div>
 					<div id="total-price">
-						<p class="text-body2"><b>$27.60</b></p>
+						<p class="text-body2" id="total"><b>$0.00</b></p>
 					</div>
 				</div>
 
@@ -110,5 +109,6 @@
 
 			</div>
 		</div>
+		<script src="main.js"></script>
 	</body>
 </html>
