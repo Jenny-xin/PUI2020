@@ -72,11 +72,10 @@ function updateCart() {
 }
 
 
+var orderArray = JSON.parse(localStorage.getItem('cart'));
 
 function loadCart() {
 	let parentEl = document.getElementById('cart-items');
-
-	var orderArray = JSON.parse(localStorage.getItem('cart'));
 
 	var retrieveCount = localStorage.getItem('count');
 	var parsedCount =  JSON.parse(retrieveCount);
@@ -84,7 +83,7 @@ function loadCart() {
 	cartCount.innerHTML = 'Cart (' + parsedCount + ')';
 	itemCount.innerHTML = 'Cart (' + parsedCount + ' items)';
 
-
+	var priceArray =[]
 
 // create cart item 
 	for (var i=0; i < orderArray.length; i++) {
@@ -159,7 +158,9 @@ function loadCart() {
 
 		let totalPrice = document.createElement('int');
 		totalPrice.classList.add('text-body2', 'total-price');
-		totalPrice.innerHTML = '$' + orderArray[i].quantity * 2 + ' total';
+		price = orderArray[i].quantity * 2;
+		priceArray.push(price);
+		totalPrice.innerHTML = '$' + price + ' total';
 		priceContainer.appendChild(totalPrice);
 
 		let unitPrice = document.createElement('p');
@@ -171,15 +172,37 @@ function loadCart() {
 		deleteBtn.innerHTML = 'Delete this Item';
 		deleteBtn.classList.add('deleteBtn');
 		priceContainer.appendChild(deleteBtn);
+
 		deleteBtn.onclick = function() {
 			itemContainer.remove();
-			orderArray.splice(i,1);
+			removeItem(i)
 			parsedCount = parsedCount - orderArray[i].quantity; 
 			cartCount.innerHTML = 'Cart (' + parsedCount + ')';
 			itemCount.innerHTML = 'Cart (' + parsedCount + ' items)';
-
 		}
 
+		//set order summary prices
+		var orderSubtotal = document.getElementById('subtotal')
+		var sum = 0;
+		for (i = 0; i < priceArray.length; i++) {
+			sum += priceArray[i];
+		}
+		orderSubtotal.innerHTML = '$' + (Math.round(sum*100.00)/100.00);
+
+		var orderTax = sum * 0.06
+		document.getElementById('tax').innerHTML = '$' + (Math.round(orderTax*100.00)/100.00);
+
+		var orderTotal = Math.round((orderTax + sum + 2.99)*100.00) / 100.00;
+		document.getElementById('total').innerHTML = '$' + orderTotal;
 	}
-	
 }
+
+function removeItem() {
+	orderArray.splice();
+	console.log(orderArray)
+}
+
+//store cart items after navigating away from cart page
+// function saveCart() {
+// 	localStorage.setItem('order', JSON.stringify(orderArray));
+// }
