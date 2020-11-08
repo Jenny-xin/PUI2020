@@ -47,7 +47,7 @@ function addToCart() {
 		cartCountArray.push(rolls)
 		}
 
-	updateCart(cartCountArray.length)
+	updateCart()
 
 	localStorage.setItem('cart', JSON.stringify(cartArray));
 
@@ -72,10 +72,8 @@ function updateCart() {
 }
 
 function loadCartCounter() {
-	var orderArray = JSON.parse(localStorage.getItem('cart'));
 	var retrieveCount = localStorage.getItem('count');
 	var parsedCount =  JSON.parse(retrieveCount);
-
 	cartCount.innerHTML = 'Cart (' + parsedCount + ')';
 }
 
@@ -93,7 +91,7 @@ function loadCart() {
 // create cart item 
 	if (orderArray.length == 0) {
 		modalNoItems.style.display = 'block';
-		}
+	}
 
 	for (var i=0; i < orderArray.length; i++) {
 
@@ -112,6 +110,7 @@ function loadCart() {
 		let itemFlexContainer = document.createElement('div');
 		itemFlexContainer.className = 'item-box-flex-items';
 		itemContainer.appendChild(itemFlexContainer);
+		itemContainer.value = i;
 
 		let detailsContainer = document.createElement('div');
 		itemFlexContainer.appendChild(detailsContainer);
@@ -125,7 +124,6 @@ function loadCart() {
 		itemGlaze.innerHTML = orderArray[i].glaze;
 		itemGlaze.classList.add('text-body3')
 		detailsContainer.appendChild(itemGlaze);
-
 
 		let itemQuant = document.createElement('p');
 		itemQuant.innerHTML = 'Qty: ' + orderArray[i].quantity;
@@ -154,32 +152,34 @@ function loadCart() {
 		deleteBtn.value = i
 		priceContainer.appendChild(deleteBtn);
 
-		deleteBtn.onclick = function(e) {
-			console.log(orderArray)
-
-			itemContainer.remove();
-
-			let remove = orderArray.splice(e.target.value,1);
-			if (orderArray.length == 0) {
-				modalNoItems.style.display = 'block';
-				parsedCount = 0;
-				cartCount.innerHTML = 'Cart';
-				itemCount.innerHTML = 'No Items in Cart';
-			}
-
-			else {
-				parsedCount = parsedCount - remove[0].quantity; 
-				cartCount.innerHTML = 'Cart (' + parsedCount + ')';
-				itemCount.innerHTML = 'Cart (' + parsedCount + ' items)';
-			}
-
-			console.log(remove)
-			console.log(orderArray)
-
-			localStorage.setItem('cart', JSON.stringify(orderArray));
-			localStorage.setItem('count', JSON.stringify(orderArray.length));
+		console.log('before ', orderArray)
+		deleteBtn.onclick = function(e){
+			deleteItem()
+			itemContainer.remove()
 		}
+		// deleteBtn.onclick = function(e) {
+		// 	console.log('after ', orderArray)
+		// 	itemContainer.remove();
+		// 	let remove = orderArray.splice(e.target.value,1);
+		// 	console.log('after ', remove)
+		// 	console.log('target ',e.target.value)
+		// 	if (orderArray.length == 0) {
+		// 		modalNoItems.style.display = 'block';
+		// 		parsedCount = 0;
+		// 		cartCount.innerHTML = 'Cart';
+		// 		itemCount.innerHTML = 'No Items in Cart';
+		// 	}
 
+		// 	else {
+		// 		parsedCount = parsedCount - remove[0].quantity; 
+		// 		cartCount.innerHTML = 'Cart (' + parsedCount + ')';
+		// 		itemCount.innerHTML = 'Cart (' + parsedCount + ' items)';
+		// 	}
+
+		// 	localStorage.setItem('cart', JSON.stringify(orderArray));
+		// 	localStorage.setItem('count', JSON.stringify(orderArray.length));
+		// }
+		
 		//set order summary prices
 		var orderSubtotal = document.getElementById('subtotal')
 		var sum = 0;
@@ -193,5 +193,29 @@ function loadCart() {
 
 		var orderTotal = Math.round((orderTax + sum + 2.99)*100.00) / 100.00;
 		document.getElementById('total').innerHTML = '$' + orderTotal;
+	}
+
+	function deleteItem() {
+		itemContainer = document.getElementsByClassName;
+
+		let remove = orderArray.splice(itemContainer.value,1);
+		console.log('after ', remove)
+		console.log('after ', orderArray)
+
+		if (orderArray.length == 0) {
+			modalNoItems.style.display = 'block';
+			parsedCount = 0;
+			cartCount.innerHTML = 'Cart';
+			itemCount.innerHTML = 'No Items in Cart';
+		}
+
+		else {
+			parsedCount = parsedCount - remove[0].quantity; 
+			cartCount.innerHTML = 'Cart (' + parsedCount + ')';
+			itemCount.innerHTML = 'Cart (' + parsedCount + ' items)';
+		}
+
+		localStorage.setItem('cart', JSON.stringify(orderArray));
+		localStorage.setItem('count', JSON.stringify(orderArray.length));
 	}
 }
