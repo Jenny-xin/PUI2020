@@ -9,7 +9,17 @@
 	</head>
 
 
-	<body id="body-gray" onload="loadCart()" onbeforeunload="return saveCart()">
+	<body id="body-gray" onload="loadCart()">
+
+<!--------------------- No Items in Cart Popup -------------------->
+	<div class="modal vertical-align" id="modalNoItems">
+		<div class="popup-container middle-align">
+			<p class="text-body2"><b>No Items in Cart</b></p>
+			<div id="button-container">
+				<form action="order.html"><input type="submit" class="align-center popup-button" value="Shop for Rolls"></form>
+			</div>
+		</div>
+	</div>
 
 	<!-- Navigation Bar containing menu & logo -->
 		<div class="navbar">
@@ -37,7 +47,7 @@
 			<div id="cart-items">
 
 		<!-------------- Cart item template ------------->
-				<div class="item">
+				<!--<div class="item">
 					<div>
 						<img src="Assets/Original-product.png" class="item-img">
 					</div>
@@ -64,7 +74,7 @@
 						</div>
 
 					</div>
-				</div>
+				</div>-->
 
 			</div>
 
