@@ -466,9 +466,10 @@ h1 {
 	display: grid;
 	grid-template-columns: 200px 200px 200px;
 	grid-template-rows: 200px 200px;
-	grid-gap: 110px;
+	grid-gap: 100px;
 	padding: 50px;
 	justify-content: center;
+	margin-top: -30px;
 }
 
 .item-container {
@@ -477,6 +478,7 @@ h1 {
 	box-shadow: 0px 5px 5px #BCC1C3;
 	background-color: white;
 	padding-top: 10px;
+	margin-bottom: 20px;
 }
 
 .roll-image {
@@ -580,7 +582,7 @@ h1 {
 	width: 150px;
 	height: 10px;
 	float: right;
-	margin-right: 170px;
+	margin-right: 140px;
 	margin-top: 5px;
 }
 
@@ -762,10 +764,12 @@ h1 {
 	padding-right: 12px;
 	padding-left: 5px;
 	outline: none;
+	background-color: white;
 }
 
 .item-box-price {
-	margin-left: 150px;
+	margin-left: 220px;
+	margin-top: 10px;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end
