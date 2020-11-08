@@ -1,222 +1,218 @@
 
-var cartArray = []
-var cartCountArray = []
+var cartArray = [];
+var cartCountArray = [];
 
 // class for cinnamon rolls
 class Rolls {
-	constructor(glaze, quantity) {
-		this.glaze = glaze
-		this.quantity = quantity
-	}
-	
+  constructor (glaze, quantity) {
+    this.glaze = glaze;
+    this.quantity = quantity;
+  }
 }
 
-var newGlaze = ''
+var newGlaze = '';
 
 // handle click events for all the glaze buttons
-function glazeClickHandler() {
-	let nodeGlazeButtons = document.querySelectorAll("input.glaze-button")
-	for (let nodeGlazeButton of nodeGlazeButtons) {
-		nodeGlazeButton.onclick = function(e) {
-			let nodeGlazeButtonsActive = document.querySelectorAll("input.buttonSmallWhiteBorderActive")
-			for (let prevActiveButton of nodeGlazeButtonsActive) {
-				prevActiveButton.classList.remove("buttonSmallWhiteBorderActive");
-			}
+function glazeClickHandler () {
+  let nodeGlazeButtons = document.querySelectorAll ('input.glaze-button');
+  for (let nodeGlazeButton of nodeGlazeButtons) {
+    nodeGlazeButton.onclick = function (e) {
+      let nodeGlazeButtonsActive = document.querySelectorAll (
+        'input.buttonSmallWhiteBorderActive'
+      );
+      for (let prevActiveButton of nodeGlazeButtonsActive) {
+        prevActiveButton.classList.remove ('buttonSmallWhiteBorderActive');
+      }
 
-			let clickedInputBtn = e.target
-			clickedInputBtn.classList.add("buttonSmallWhiteBorderActive");
-			newGlaze = clickedInputBtn.value;
-		}
-	}
+      let clickedInputBtn = e.target;
+      clickedInputBtn.classList.add ('buttonSmallWhiteBorderActive');
+      newGlaze = clickedInputBtn.value;
+    };
+  }
 }
-	
-glazeClickHandler()
 
+glazeClickHandler ();
 
-var modalCart = document.getElementById('modalCart');
+var modalCart = document.getElementById ('modalCart');
 
 // create new Rolls object with new quantity and glaze values
-function addToCart() {
-	var quantity = document.getElementById('quantity').value;
-	var quantityNum = parseInt(quantity)
-	var rolls = new Rolls(newGlaze, quantityNum)
-	cartArray.push(rolls)
-	console.log(cartArray)
-	
-	for (var i=0; i < quantityNum; i++) {
-		cartCountArray.push(rolls)
-		}
+function addToCart () {
+  var quantity = document.getElementById('quantity').value;
+  var quantityNum = parseInt(quantity)
+  if (quantityNum > 0 && newGlaze !='') {
+    var rolls = new Rolls(newGlaze, quantityNum)
+    cartArray.push(rolls)
+    console.log(cartArray)
+  
+    for (var i=0; i < quantityNum; i++) {
+      cartCountArray.push(rolls)
+      }
 
-	updateCart()
+    updateCart()
 
-	localStorage.setItem('cart', JSON.stringify(cartArray));
+    localStorage.setItem('cart', JSON.stringify(cartArray));
 
-	// open modal after clicking "Add to Cart" button
-	modalCart.style.display = 'block';
-}
+  // open modal after clicking "Add to Cart" button
+    modalCart.style.display = 'block';
+  }
+
+  //alert for if a glaze or quantity is not chosen
+  else {
+      alert('Please choose both a glaze and quantity.');
+    }
+  }
+
 
 //close modal after clicking x button
-function exitModal() {
-	var exitModal = document.getElementsByClassName('closeModal');
-	modalCart.style.display = 'none';
+function exitModal () {
+  var exitModal = document.getElementsByClassName ('closeModal');
+  modalCart.style.display = 'none';
 }
 
 // update items in cart
-function updateCart() {
-	var cartCount = document.getElementById('cartCount');
-	if (cartCountArray.length > 0) {
-	cartCount.innerHTML = 'Cart (' + cartCountArray.length + ')'
-	}
+function updateCart () {
+  var cartCount = document.getElementById ('cartCount');
+  if (cartCountArray.length > 0) {
+    cartCount.innerHTML = 'Cart (' + cartCountArray.length + ')';
+  }
 
-	localStorage.setItem('count', JSON.stringify(cartCountArray.length));
+  localStorage.setItem ('count', JSON.stringify (cartCountArray.length));
 }
 
-function loadCartCounter() {
-	var retrieveCount = localStorage.getItem('count');
-	var parsedCount =  JSON.parse(retrieveCount);
-	cartCount.innerHTML = 'Cart (' + parsedCount + ')';
+function loadCartCounter () {
+  var retrieveCount = localStorage.getItem ('count');
+  var parsedCount = JSON.parse (retrieveCount);
+  cartCount.innerHTML = 'Cart (' + parsedCount + ')';
 }
 
-function loadCart() {
-	var orderArray = JSON.parse(localStorage.getItem('cart'));
-	var retrieveCount = localStorage.getItem('count');
-	var parsedCount =  JSON.parse(retrieveCount);
+function loadCart () {
+  var orderArray = JSON.parse (localStorage.getItem ('cart'));
+  var retrieveCount = localStorage.getItem ('count');
+  var parsedCount = JSON.parse (retrieveCount);
 
-	cartCount.innerHTML = 'Cart (' + parsedCount + ')';
-	itemCount.innerHTML = 'Cart (' + parsedCount + ' items)';
+  cartCount.innerHTML = 'Cart (' + parsedCount + ')';
+  itemCount.innerHTML = 'Cart (' + parsedCount + ' items)';
 
-	let parentEl = document.getElementById('cart-items');
-	var priceArray =[]
+  let parentEl = document.getElementById ('cart-items');
+  var priceArray = [];
 
-// create cart item 
-	if (orderArray.length == 0) {
-		modalNoItems.style.display = 'block';
-	}
+  // display popup if there are no items in the cart
+  if (orderArray.length == 0) {
+    modalNoItems.style.display = 'block';
+  }
 
-	for (var i=0; i < orderArray.length; i++) {
+  for (var i = 0; i < orderArray.length; i++) {
 
-		let itemContainer = document.createElement('div');
-		itemContainer.className = 'item';
-		itemContainer.id = i;
-		parentEl.appendChild(itemContainer);
-		itemContainer.value = i;
+  	// create html elements needed for cart item
+    let itemContainer = document.createElement ('div');
+    itemContainer.className = 'item';
+    itemContainer.id = i;
+    itemContainer.value = i;
+    parentEl.appendChild (itemContainer);
 
-		let divImg = document.createElement('div');
-		itemContainer.appendChild(divImg);
+    let divImg = document.createElement ('div');
+    itemContainer.appendChild (divImg);
 
-		let img = document.createElement('img');
-		img.src = 'Assets/Original-product.png';
-		img.classList.add('item-img');
-		divImg.appendChild(img);
+    let img = document.createElement ('img');
+    img.src = 'Assets/Original-product.png';
+    img.classList.add ('item-img');
+    divImg.appendChild (img);
 
-		let itemFlexContainer = document.createElement('div');
-		itemFlexContainer.className = 'item-box-flex-items';
-		itemContainer.appendChild(itemFlexContainer);
+    let itemFlexContainer = document.createElement ('div');
+    itemFlexContainer.className = 'item-box-flex-items';
+    itemContainer.appendChild (itemFlexContainer);
+    itemContainer.value = i;
 
-		let detailsContainer = document.createElement('div');
-		itemFlexContainer.appendChild(detailsContainer);
+    let detailsContainer = document.createElement ('div');
+    itemFlexContainer.appendChild (detailsContainer);
 
-		let itemName = document.createElement('p');
-		itemName.innerHTML = 'Original Roll';
-		itemName.classList.add('text-body2');
-		detailsContainer.appendChild(itemName);
+    let itemName = document.createElement ('p');
+    itemName.innerHTML = 'Original Roll';
+    itemName.classList.add ('text-body2');
+    detailsContainer.appendChild (itemName);
 
-		let itemGlaze = document.createElement('p');
-		itemGlaze.innerHTML = orderArray[i].glaze;
-		itemGlaze.classList.add('text-body3')
-		detailsContainer.appendChild(itemGlaze);
+    let itemGlaze = document.createElement ('p');
+    itemGlaze.innerHTML = orderArray[i].glaze;
+    itemGlaze.classList.add ('text-body3');
+    detailsContainer.appendChild (itemGlaze);
 
-		let itemQuant = document.createElement('p');
-		itemQuant.innerHTML = 'Qty: ' + orderArray[i].quantity;
-		itemQuant.classList.add('text-body3', 'vertical-align');
-		detailsContainer.appendChild(itemQuant);
+    let itemQuant = document.createElement ('p');
+    itemQuant.innerHTML = 'Qty: ' + orderArray[i].quantity;
+    itemQuant.classList.add ('text-body3', 'vertical-align');
+    detailsContainer.appendChild (itemQuant);
 
-		let priceContainer = document.createElement('div');
-		priceContainer.className = 'item-box-price';
-		itemFlexContainer.appendChild(priceContainer);
+    let priceContainer = document.createElement ('div');
+    priceContainer.className = 'item-box-price';
+    itemFlexContainer.appendChild (priceContainer);
 
-		let totalPrice = document.createElement('int');
-		totalPrice.classList.add('text-body2', 'total-price');
-		price = orderArray[i].quantity * 2;
-		priceArray.push(price);
-		totalPrice.innerHTML = '$' + price + ' total';
-		priceContainer.appendChild(totalPrice);
+    let totalPrice = document.createElement ('int');
+    totalPrice.classList.add ('text-body2', 'total-price');
+    price = orderArray[i].quantity * 2;
+    priceArray.push (price);
+    totalPrice.innerHTML = '$' + price + ' total';
+    priceContainer.appendChild (totalPrice);
 
-		let unitPrice = document.createElement('p');
-		unitPrice.classList.add('text-body3');
-		unitPrice.innerHTML = '$2.00 each';
-		priceContainer.appendChild(unitPrice);
+    let unitPrice = document.createElement ('p');
+    unitPrice.classList.add ('text-body3');
+    unitPrice.innerHTML = '$2.00 each';
+    priceContainer.appendChild (unitPrice);
 
-		let deleteBtn = document.createElement('button');
-		deleteBtn.innerHTML = 'Delete this Item';
-		deleteBtn.classList.add('deleteBtn');
-		deleteBtn.value = i
-		priceContainer.appendChild(deleteBtn);
+    let deleteBtn = document.createElement ('button');
+    deleteBtn.innerHTML = 'Delete this Item';
+    deleteBtn.classList.add ('deleteBtn');
+    deleteBtn.value = i;
+    priceContainer.appendChild (deleteBtn);
+    let num = i;
 
-		console.log('before ', orderArray)
-		deleteBtn.onclick = function() {
-			deleteItem()
-			itemContainer.remove()
-		}
-		// deleteBtn.onclick = function(e) {
-		// 	console.log('after ', orderArray)
-		// 	itemContainer.remove();
-		// 	let remove = orderArray.splice(e.target.value,1);
-		// 	console.log('after ', remove)
-		// 	console.log('target ',e.target.value)
-		// 	if (orderArray.length == 0) {
-		// 		modalNoItems.style.display = 'block';
-		// 		parsedCount = 0;
-		// 		cartCount.innerHTML = 'Cart';
-		// 		itemCount.innerHTML = 'No Items in Cart';
-		// 	}
 
-		// 	else {
-		// 		parsedCount = parsedCount - remove[0].quantity; 
-		// 		cartCount.innerHTML = 'Cart (' + parsedCount + ')';
-		// 		itemCount.innerHTML = 'Cart (' + parsedCount + ' items)';
-		// 	}
+    deleteBtn.onclick = function (e) {
+      deleteItem (num);
+      document.querySelectorAll ('.item').forEach (function (a) {
+        a.remove ();
+      });
+      loadCart ();
+    };
 
-		// 	localStorage.setItem('cart', JSON.stringify(orderArray));
-		// 	localStorage.setItem('count', JSON.stringify(orderArray.length));
-		// }
-		
-		//set order summary prices
-		var orderSubtotal = document.getElementById('subtotal')
-		var sum = 0;
-		for (var n = 0; n < priceArray.length; n++) {
-			sum += priceArray[n];
-		}
-		orderSubtotal.innerHTML = '$' + (Math.round(sum*100.00)/100.00);
+    //set order summary prices
+    var orderSubtotal = document.getElementById ('subtotal');
+    var sum = 0;
+    for (var n = 0; n < priceArray.length; n++) {
+      sum += priceArray[n];
+    }
+    orderSubtotal.innerHTML = '$' + Math.round (sum * 100.00) / 100.00;
 
-		var orderTax = sum * 0.06
-		document.getElementById('tax').innerHTML = '$' + (Math.round(orderTax*100.00)/100.00);
+    var orderTax = sum * 0.06;
+    document.getElementById ('tax').innerHTML =
+      '$' + Math.round (orderTax * 100.00) / 100.00;
 
-		var orderTotal = Math.round((orderTax + sum + 2.99)*100.00) / 100.00;
-		document.getElementById('total').innerHTML = '$' + orderTotal;
-	}
+    var orderTotal = Math.round ((orderTax + sum + 2.99) * 100.00) / 100.00;
+    document.getElementById ('total').innerHTML = '$' + orderTotal;
+  }
 
-	function deleteItem(event) {
-		itemContainer = document.getElementById(i);
 
-		let remove = orderArray.splice(itemContainer.value,1);
-		console.log('remove ', remove)
-		console.log('order ', orderArray)
+// delete item from cart
+  function deleteItem (i) {
+    itemContainer = document.getElementById (i);
+    console.log ('Prinitng Iem');
+    console.log (itemContainer);
 
-		if (orderArray.length == 0) {
-			modalNoItems.style.display = 'block';
-			parsedCount = 0;
-			cartCount.innerHTML = 'Cart';
-			itemCount.innerHTML = 'No Items in Cart';
-		}
+    let remove = orderArray.splice (itemContainer.value, 1);
+    console.log ('after ', remove);
+    console.log ('after ', orderArray);
 
-		else {
-			parsedCount = parsedCount - remove[0].quantity; 
-			cartCount.innerHTML = 'Cart (' + parsedCount + ')';
-			itemCount.innerHTML = 'Cart (' + parsedCount + ' items)';
-		}
-
-		localStorage.setItem('cart', JSON.stringify(orderArray));
-		localStorage.setItem('count', JSON.stringify(orderArray.length));
-	}
+    if (orderArray.length == 0) {
+      modalNoItems.style.display = 'block';
+      parsedCount = 0;
+      cartCount.innerHTML = 'Cart';
+      itemCount.innerHTML = 'No Items in Cart';
+    } else {
+      console.log ('count:', parsedCount);
+      parsedCount = parsedCount - remove[0].quantity;
+      cartCount.innerHTML = 'Cart (' + parsedCount + ')';
+      itemCount.innerHTML = 'Cart (' + parsedCount + ' items)';
+    }
+    
+    localStorage.setItem ('cart', JSON.stringify (orderArray));
+    localStorage.setItem ('count', JSON.stringify (parsedCount));
+  }
 }
