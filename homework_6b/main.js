@@ -97,7 +97,9 @@ function loadCart() {
 
 		let itemContainer = document.createElement('div');
 		itemContainer.className = 'item';
+		itemContainer.id = i;
 		parentEl.appendChild(itemContainer);
+		itemContainer.value = i;
 
 		let divImg = document.createElement('div');
 		itemContainer.appendChild(divImg);
@@ -110,7 +112,6 @@ function loadCart() {
 		let itemFlexContainer = document.createElement('div');
 		itemFlexContainer.className = 'item-box-flex-items';
 		itemContainer.appendChild(itemFlexContainer);
-		itemContainer.value = i;
 
 		let detailsContainer = document.createElement('div');
 		itemFlexContainer.appendChild(detailsContainer);
@@ -153,7 +154,7 @@ function loadCart() {
 		priceContainer.appendChild(deleteBtn);
 
 		console.log('before ', orderArray)
-		deleteBtn.onclick = function(e){
+		deleteBtn.onclick = function() {
 			deleteItem()
 			itemContainer.remove()
 		}
@@ -195,12 +196,12 @@ function loadCart() {
 		document.getElementById('total').innerHTML = '$' + orderTotal;
 	}
 
-	function deleteItem() {
-		itemContainer = document.getElementsByClassName;
+	function deleteItem(event) {
+		itemContainer = document.getElementById(i);
 
 		let remove = orderArray.splice(itemContainer.value,1);
-		console.log('after ', remove)
-		console.log('after ', orderArray)
+		console.log('remove ', remove)
+		console.log('order ', orderArray)
 
 		if (orderArray.length == 0) {
 			modalNoItems.style.display = 'block';
