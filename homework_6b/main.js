@@ -71,21 +71,30 @@ function updateCart() {
 	localStorage.setItem('count', JSON.stringify(cartCountArray.length));
 }
 
+function loadCartCounter() {
+	var orderArray = JSON.parse(localStorage.getItem('cart'));
+	var retrieveCount = localStorage.getItem('count');
+	var parsedCount =  JSON.parse(retrieveCount);
 
-var orderArray = JSON.parse(localStorage.getItem('cart'));
+	cartCount.innerHTML = 'Cart (' + parsedCount + ')';
+}
 
 function loadCart() {
-	let parentEl = document.getElementById('cart-items');
-
+	var orderArray = JSON.parse(localStorage.getItem('cart'));
 	var retrieveCount = localStorage.getItem('count');
 	var parsedCount =  JSON.parse(retrieveCount);
 
 	cartCount.innerHTML = 'Cart (' + parsedCount + ')';
 	itemCount.innerHTML = 'Cart (' + parsedCount + ' items)';
 
+	let parentEl = document.getElementById('cart-items');
 	var priceArray =[]
 
 // create cart item 
+	if (orderArray.length == 0) {
+		modalNoItems.style.display = 'block';
+		}
+
 	for (var i=0; i < orderArray.length; i++) {
 
 		let itemContainer = document.createElement('div');
@@ -118,39 +127,10 @@ function loadCart() {
 		detailsContainer.appendChild(itemGlaze);
 
 
-		//dropdown for choosing quantity
-		let itemQuant = document.createElement('select');
-		itemQuant.classList.add('item-dropdown');
-
-		let option1 = document.createElement('option');
-		option1.value = 1
-		option1.text = 'Qty: 1 Roll'
-		itemQuant.add(option1);
-
-		let option2 = document.createElement('option');
-		option2.value = 3
-		option2.text = 'Qty: 3 Rolls'
-		itemQuant.add(option2);
-
-		let option3 = document.createElement('option');
-		option3.value = 6
-		option3.text = 'Qty: 6 Rolls'
-		itemQuant.add(option3);
-
-		let option4 = document.createElement('option');
-		option4.value = 12
-		option4.text = 'Qty: 12 Rolls';
-		itemQuant.add(option4);
-
-		for (var x=0; x < itemQuant.options.length; x++) {
-			if (itemQuant.options[x].value == orderArray[i].quantity) {
-				itemQuant.options[x].selected = 'selected'
-			}
-		}
-
+		let itemQuant = document.createElement('p');
+		itemQuant.innerHTML = 'Qty: ' + orderArray[i].quantity;
+		itemQuant.classList.add('text-body3', 'vertical-align');
 		detailsContainer.appendChild(itemQuant);
-
-		//---------------------------------------------
 
 		let priceContainer = document.createElement('div');
 		priceContainer.className = 'item-box-price';
@@ -171,21 +151,40 @@ function loadCart() {
 		let deleteBtn = document.createElement('button');
 		deleteBtn.innerHTML = 'Delete this Item';
 		deleteBtn.classList.add('deleteBtn');
+		deleteBtn.value = i
 		priceContainer.appendChild(deleteBtn);
 
-		deleteBtn.onclick = function() {
+		deleteBtn.onclick = function(e) {
+			console.log(orderArray)
+
 			itemContainer.remove();
-			removeItem(i)
-			parsedCount = parsedCount - orderArray[i].quantity; 
-			cartCount.innerHTML = 'Cart (' + parsedCount + ')';
-			itemCount.innerHTML = 'Cart (' + parsedCount + ' items)';
+
+			let remove = orderArray.splice(e.target.value,1);
+			if (orderArray.length == 0) {
+				modalNoItems.style.display = 'block';
+				parsedCount = 0;
+				cartCount.innerHTML = 'Cart';
+				itemCount.innerHTML = 'No Items in Cart';
+			}
+
+			else {
+				parsedCount = parsedCount - remove[0].quantity; 
+				cartCount.innerHTML = 'Cart (' + parsedCount + ')';
+				itemCount.innerHTML = 'Cart (' + parsedCount + ' items)';
+			}
+
+			console.log(remove)
+			console.log(orderArray)
+
+			localStorage.setItem('cart', JSON.stringify(orderArray));
+			localStorage.setItem('count', JSON.stringify(orderArray.length));
 		}
 
 		//set order summary prices
 		var orderSubtotal = document.getElementById('subtotal')
 		var sum = 0;
-		for (i = 0; i < priceArray.length; i++) {
-			sum += priceArray[i];
+		for (var n = 0; n < priceArray.length; n++) {
+			sum += priceArray[n];
 		}
 		orderSubtotal.innerHTML = '$' + (Math.round(sum*100.00)/100.00);
 
@@ -196,13 +195,3 @@ function loadCart() {
 		document.getElementById('total').innerHTML = '$' + orderTotal;
 	}
 }
-
-function removeItem() {
-	orderArray.splice();
-	console.log(orderArray)
-}
-
-//store cart items after navigating away from cart page
-// function saveCart() {
-// 	localStorage.setItem('order', JSON.stringify(orderArray));
-// }
