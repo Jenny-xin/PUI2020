@@ -88,6 +88,7 @@ function updateCart () {
   localStorage.setItem ('count', JSON.stringify (count));
 }
 
+//load the counter for items in cart
 function loadCartCounter () {
   var retrieveCount = localStorage.getItem ('count');
 
@@ -103,6 +104,7 @@ function loadCartCounter () {
   cartCount.innerHTML = 'Cart (' + parsedCount + ')';
 }
 
+// load the items in cart
 function loadCart () {
   var orderArray = JSON.parse (localStorage.getItem ('cart'));
   var retrieveCount = localStorage.getItem ('count');
@@ -191,7 +193,7 @@ function loadCart () {
     priceContainer.appendChild (deleteBtn);
     let num = i;
 
-
+    // onclick event for deleting an item
     deleteBtn.onclick = function (e) {
       deleteItem (num);
       document.querySelectorAll ('.item').forEach (function (a) {
