@@ -1,6 +1,18 @@
+//check local storage to make sure nothing is reset if there are items
+if (localStorage.getItem ('count') == null) {
+	var count = 0;
+	}
+else {
+	var count = parseInt (localStorage.getItem('count'));
+	}
 
-var cartArray = [];
-var cartCountArray = [];
+if (localStorage.getItem ('cart') == null) {
+	var cartArray = [];
+	}
+else {
+	var cartArray = JSON.parse (localStorage.getItem ('cart'));
+}
+
 
 // class for cinnamon rolls
 class Rolls {
@@ -35,6 +47,7 @@ glazeClickHandler ();
 
 var modalCart = document.getElementById ('modalCart');
 
+
 // create new Rolls object with new quantity and glaze values
 function addToCart () {
   var quantity = document.getElementById('quantity').value;
@@ -44,9 +57,7 @@ function addToCart () {
     cartArray.push(rolls)
     console.log(cartArray)
   
-    for (var i=0; i < quantityNum; i++) {
-      cartCountArray.push(rolls)
-      }
+    count = count + quantityNum
 
     updateCart()
 
@@ -72,15 +83,22 @@ function exitModal () {
 // update items in cart
 function updateCart () {
   var cartCount = document.getElementById ('cartCount');
-  if (cartCountArray.length > 0) {
-    cartCount.innerHTML = 'Cart (' + cartCountArray.length + ')';
-  }
+  cartCount.innerHTML = 'Cart (' + count + ')';
 
-  localStorage.setItem ('count', JSON.stringify (cartCountArray.length));
+  localStorage.setItem ('count', JSON.stringify (count));
 }
 
 function loadCartCounter () {
   var retrieveCount = localStorage.getItem ('count');
+
+  if (retrieveCount == null) {
+  	retrieveCount = 0
+  }
+
+  if (orderArray == null) {
+  	orderArray =[]
+  }
+
   var parsedCount = JSON.parse (retrieveCount);
   cartCount.innerHTML = 'Cart (' + parsedCount + ')';
 }
@@ -88,6 +106,14 @@ function loadCartCounter () {
 function loadCart () {
   var orderArray = JSON.parse (localStorage.getItem ('cart'));
   var retrieveCount = localStorage.getItem ('count');
+  if (retrieveCount == null) {
+  	retrieveCount = 0
+  }
+
+  if (orderArray == null) {
+  	orderArray =[]
+  }
+
   var parsedCount = JSON.parse (retrieveCount);
 
   cartCount.innerHTML = 'Cart (' + parsedCount + ')';
@@ -98,6 +124,7 @@ function loadCart () {
 
   // display popup if there are no items in the cart
   if (orderArray.length == 0) {
+
     modalNoItems.style.display = 'block';
   }
 
@@ -193,19 +220,17 @@ function loadCart () {
 // delete item from cart
   function deleteItem (i) {
     itemContainer = document.getElementById (i);
-    console.log ('Prinitng Iem');
-    console.log (itemContainer);
 
     let remove = orderArray.splice (itemContainer.value, 1);
-    console.log ('after ', remove);
-    console.log ('after ', orderArray);
 
     if (orderArray.length == 0) {
       modalNoItems.style.display = 'block';
       parsedCount = 0;
       cartCount.innerHTML = 'Cart';
       itemCount.innerHTML = 'No Items in Cart';
-    } else {
+    } 
+
+    else {
       console.log ('count:', parsedCount);
       parsedCount = parsedCount - remove[0].quantity;
       cartCount.innerHTML = 'Cart (' + parsedCount + ')';
