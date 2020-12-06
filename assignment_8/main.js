@@ -1,54 +1,88 @@
 //Google Maps section //
 function initMap() {
-  var LatLng = {lat:40.730610, lng: -73.935242}
-  var mapProp = {
-    center: LatLng,
-    zoom: 2
-  }
-  var map = new google.maps.Map(document.getElementById('googleMap'), mapProp);
+  const map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: -33.8688, lng: 151.2195 },
+    zoom: 13,
+  });
+  const card = document.getElementById("pac-card");
+  const input = document.getElementById("pac-input");
+/*   map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card); */
+  const autocomplete = new google.maps.places.Autocomplete(input);
+  // Bind the map's bounds (viewport) property to the autocomplete object,
+  // so that the autocomplete requests use the current map bounds for the
+  // bounds option in the request.
+  autocomplete.bindTo("bounds", map);
+  // Set the data fields to return when the user selects a place.
+  autocomplete.setFields(["address_components", "geometry", "icon", "name"]);
+  const infowindow = new google.maps.InfoWindow();
+  const infowindowContent = document.getElementById("infowindow-content");
+  infowindow.setContent(infowindowContent);
+  const marker = new google.maps.Marker({
+    map,
+    anchorPoint: new google.maps.Point(0, -29),
+  });
+  autocomplete.addListener("place_changed", () => {
+    infowindow.close();
+    marker.setVisible(false);
+    const place = autocomplete.getPlace();
 
-  var input = document.getElementById('locationField');
-  // var options = {
-  //   types: ['cities'],
-  // }
+    if (!place.geometry) {
+      // User entered the name of a Place that was not suggested and
+      // pressed the Enter key, or the Place Details request failed.
+      window.alert("No details available for input: '" + place.name + "'");
+      return;
+    }
 
-  var marker = new google.maps.Marker({
-  position: LatLng,
-  map: map, 
-  draggable: true, 
+    // If the place has a geometry, then present it on a map.
+    if (place.geometry.viewport) {
+      map.fitBounds(place.geometry.viewport);
+    } else {
+      map.setCenter(place.geometry.location);
+      map.setZoom(17); // Why 17? Because it looks good.
+    }
+    marker.setPosition(place.geometry.location);
+    marker.setVisible(true);
+    let address = "";
+
+    if (place.address_components) {
+      address = [
+        (place.address_components[0] &&
+          place.address_components[0].short_name) ||
+          "",
+        (place.address_components[1] &&
+          place.address_components[1].short_name) ||
+          "",
+        (place.address_components[2] &&
+          place.address_components[2].short_name) ||
+          "",
+      ].join(" ");
+    }
+    infowindowContent.children["place-icon"].src = place.icon;
+    infowindowContent.children["place-name"].textContent = place.name;
+    infowindowContent.children["place-address"].textContent = address;
+    infowindow.open(map, marker);
   });
 
-  var autocomplete = new google.maps.places.Autocomplete(input);
-  console.log(autocomplete)
-  autocomplete.bindTo('bounds', map);
-  autocomplete.setFields(['name', 'geometry']);
-
-  var infowindow = new google.maps.InfoWindow();
-  var infowindowContent = document.getElementById('infowindow-content');
-  infowindow.setContent(infowindowContent);
-
-  google.maps.event.addListener(autocomplete, 'place_changed',function() {
-    var place = autocomplete.getPlace();
-    if (!place.geometry) {
-       window.alert('No details available for:' + place.name);
-       return;
-    if(place.geometry.viewport){
-      map.fitBounds(place.geometry.viewport);
-    }
-    else {
-      maps.setCenter(place.geometry.input);
-      mapsetZoom(17);
-    }
-
-    marker.setPlace( ({
-      placeId: place.place_id,
-      location: place.geometry.input
-    }))
-    }
-  })
-
-  google.maps.event.addDomListener(window, 'load', initMap);
+  // Sets a listener on a radio button to change the filter type on Places
+  // Autocomplete.
+  function setupClickListener(id, types) {
+    const radioButton = document.getElementById(id);
+    radioButton.addEventListener("click", () => {
+      autocomplete.setTypes(types);
+    });
+  }
+  setupClickListener("changetype-all", []);
+  setupClickListener("changetype-address", ["address"]);
+  setupClickListener("changetype-establishment", ["establishment"]);
+  setupClickListener("changetype-geocode", ["geocode"]);
+  document
+    .getElementById("use-strict-bounds")
+    .addEventListener("click", function () {
+      console.log("Checkbox clicked! New state=" + this.checked);
+      autocomplete.setOptions({ strictBounds: this.checked });
+    });
 }
+
 
 //Edit budget, location, duration//
 function saveDetails() {
@@ -56,12 +90,11 @@ function saveDetails() {
   var budgetTotal = document.getElementById('budget-total');
 
   var budgetTotalValue = document.getElementById('budgetField').value;
-
   budgetRemain.innerHTML = '$' + budgetTotalValue;
   budgetTotal.innerHTML = '/ $' + budgetTotalValue;
 
-  var tripLocation = document.getElementById('infowindow-content').value;
-  document.getElementById('location').innerHTML = '<span class="text-black">'+ tripLocation + '</span';
+  // var tripLocation = document.getElementById('location').value;
+  //document.getElementById('location').innerHTML = '<span class="text-black">'+ tripLocation + '</span';
 
   var tripDuration = document.getElementById('durationField').value;
   document.getElementById('duration').innerHTML = '<span class="text-black">' + tripDuration + '</span>';
@@ -69,6 +102,9 @@ function saveDetails() {
 
 
 function addTransport() {
+    var budgetRemain = document.getElementById('budget-remaining');
+    var budgetTotal = document.getElementById('budget-total');
+    
     var parentEl = document.getElementById('transportEl')
 
     let transportContainer = document.createElement('div');
@@ -133,7 +169,14 @@ function addTransport() {
     expInput.setAttribute('type','text');
     expInput.placeholder = '0.00';
     expInput.classList.add('form-control','text-box-expense');
+    expInput.id = 'transportExp';
     expContainer.appendChild(expInput)
+
+    var expense = document.getElementById('transportExp').value;
+    budgetTotal = budgetTotal - parseInt(expense)
+    console.log(expense)
+    console.log(parseInt(expense))
+    budgetTotal.innerHTML = '$' + budgetTotal 
 
     //space between housing expense and delete btn
     let spaceCol2 = document.createElement('div');
