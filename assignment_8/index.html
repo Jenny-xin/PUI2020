@@ -30,31 +30,25 @@
 									<input type="text" class="form-control input input" id="budgetField" placeholder="0.00">
 								</div>
 							</div>
-								
-							<!--<div class="input-container">
-								<label for="location" class="text-sm-b">Location</label>
-									<div id="pac-container">
-									<input type="text" class="form-control" id="locationField" placeholder="Enter a city">
-									<div id="infowindow-content">
-										<img src="" width="16" height="16" id="place-icon" />
-      									<span id="place-name" class="title">
-      									</span><br />
-									</div>
-									</div>
-							</div>-->
-
-							<!--<div id="pac-container">
-       							<input id="pac-input" type="text" placeholder="Enter a location" />
-      						</div>-->
 
 							<div class="input-container">
 								<label for="duration" class="text-sm-b">Trip Duration</label>
-								<input type="text" class="form-control" id="durationField" placeholder="mm/dd/yy - mm/dd/yy">
+								<input type="text" class="form-control" id="durationField" placeholder="When will your trip be?">
 							</div>
+
+							<div class="input-container">
+								<label for="location" class="text-sm-b">Location</label>
+									<div id="pac-container">
+									<input type="text" class="form-control" id="pac-input" placeholder="Where will you go?">
+									</div>
+									<div class="map-container" id="map">
+									</div>
+							</div>
+
 						</form>
 						</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-save" data-dismiss="modal" id="save" onclick="saveDetails()">Save</button>
+						<button type="button" class="btn btn-save-details" data-dismiss="modal" id="save" onclick="saveDetails()">Save</button>
 					</div>
 				</div>
 			</div>
@@ -72,29 +66,21 @@
 					<button type="button" class="btn btn-sm btn-edit text-center" data-toggle="modal" data-target="#editModal">Edit Trip Details</button>
 					<div class="budget-container">
 						<p class="text-center" id="text-white">Budget</p>
-						<p id="budget-remaining" class="text-center text-lg-w">$0.00</p>
-						<p class="text-sm-w text-center" id="budget-total">/$0.00</p>
+						<p id="budget-remaining" class="text-center text-lg-w">$0</p>
+						<p class="text-sm-w text-center" id="budget-total">/$0</p>
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="details-container align-items-center">
-						<div id="location-container">
-							<p class="text-sm-p">Location</p>
-							<p class="text-gray" id="location">New York, NY</p>
+						<div id="duration-container">
+							<p class="text-sm-p">Duration</p>
+							<p class="text-gray" id="duration">When will your trip be?</p>
 						</div>
 						<div>
-							<p class="text-sm-p">Duration</p>
-							<p class="text-gray" id="duration">mm/dd/yy - mm/dd/yy</p>
+							<p class="text-sm-p">Location</p>
+							<p class="text-gray" id="location">Where will you go?</p>
 						</div>
-					</div>
-				</div>
-
-				<div class="row">
-					<div id="pac-container">
-       					<input id="pac-input" type="text" placeholder="Enter a location" />
-      				</div>
-					<div class="map-container" id="map">
 					</div>
 				</div>
 
@@ -131,19 +117,8 @@
 									<label for="transport-expense" class="text-sm-b">Transportation Expense</label>
 										<div class="input-group">
 											<span class="input-group-addon my-auto">$</span>
-											<input type="text" class="form-control text-box-expense" placeholder="0.00">
+											<input type="text" class="form-control text-box-expense exp" value="0">
 										</div>
-								</div>
-
-								<div class="col-1">
-								</div>
-
-								<div class="col-1">
-									<div class="text-right">
-										<button type="button" class="close deleteBtn">
-										<img src="Assets/DeleteBtn.svg" class="btn-delete" alt="delete button">
-										</button>
-									</div>
 								</div>
 
 							</div>
@@ -161,7 +136,10 @@
 					</div>
 
 					<div class="row">
-							<div class="col-2">
+							<div class="col-1">
+								<input type="button" value="Save" class="btn-save" onclick="saveDetails()">
+							</div>
+							<div class="col-1">
 								<input type="button" value="Add" class="btn-add" onclick="addTransport()">
 							</div>
 					</div>
@@ -184,19 +162,8 @@
 									<label for="housing-expense" class="text-sm-b">Housing Expense</label>
 										<div class="input-group">
 											<span class="input-group-addon my-auto">$</span>
-											<input type="text" class="form-control text-box-expense" placeholder="0.00">
+											<input type="text" class="form-control text-box-expense exp" value="0">
 										</div>
-								</div>
-
-								<div class="col-1">
-								</div>
-
-								<div class="col-1">
-									<div class="text-right">
-										<button type="button" class="close deleteBtn">
-										<img src="Assets/DeleteBtn.svg" class="btn-delete" alt="delete button">
-										</button>
-									</div>
 								</div>
 
 							</div>
@@ -221,10 +188,12 @@
 							</div>
 						</div>
 					</div>
-
 					<div class="row">
-						<div class="col-2">
-							<input type="button" value="Add" class="btn-add" id=addHousing onclick="addHousing()">
+						<div class="col-1">
+							<input type="button" value="Save" class="btn-save" onclick="saveDetails()">
+						</div>
+						<div class="col-1">
+							<input type="button" value="Add" class="btn-add" onclick="addHousing()">
 						</div>
 					</div>
 
@@ -246,28 +215,21 @@
 									<label for="food-expense" class="text-sm-b">Expense</label>
 										<div class="input-group">
 											<span class="input-group-addon my-auto">$</span>
-											<input type="text" class="form-control text-box-expense" placeholder="0.00">
+											<input type="text" class="form-control text-box-expense exp" value="0">
 										</div>
 								</div>
-
-								<div class="col-1">
-								</div>
-
-								<div class="col-1">
-									<div class="text-right">
-										<button type="button" class="close deleteBtn">
-										<img src="Assets/DeleteBtn.svg" class="btn-delete" alt="delete button">
-										</button>
-									</div>
-								</div>
+							
 							</div>
 						</div>
 					</div>
-						<div class="row">
-							<div class="col-2">
-							<input type="button" value="Add" class="btn-add" id=addHousing onclick="addFood()">
-							</div>
+					<div class="row">
+						<div class="col-1">
+							<input type="button" value="Save" class="btn-save" onclick="saveDetails()">
 						</div>
+						<div class="col-1">
+							<input type="button" value="Add" class="btn-add" onclick="addFood()">
+						</div>
+					</div>
 
 
 
@@ -275,6 +237,6 @@
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAB1KpV4SyvSzQjPlcJ_lyUKHZ2y10w9xw&libraries=places&callback=initMap"></script>
+		<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAB1KpV4SyvSzQjPlcJ_lyUKHZ2y10w9xw&libraries=places&callback=initMap"></script>-->
 	</body>
 </html>

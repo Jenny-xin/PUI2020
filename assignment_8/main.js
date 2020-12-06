@@ -1,18 +1,16 @@
 //Google Maps section //
 function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: -33.8688, lng: 151.2195 },
+    center: { lat: 40.440624, lng:  -79.995888},
     zoom: 13,
   });
   const card = document.getElementById("pac-card");
   const input = document.getElementById("pac-input");
-/*   map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card); */
+
   const autocomplete = new google.maps.places.Autocomplete(input);
-  // Bind the map's bounds (viewport) property to the autocomplete object,
-  // so that the autocomplete requests use the current map bounds for the
-  // bounds option in the request.
+
   autocomplete.bindTo("bounds", map);
-  // Set the data fields to return when the user selects a place.
+
   autocomplete.setFields(["address_components", "geometry", "icon", "name"]);
   const infowindow = new google.maps.InfoWindow();
   const infowindowContent = document.getElementById("infowindow-content");
@@ -27,18 +25,14 @@ function initMap() {
     const place = autocomplete.getPlace();
 
     if (!place.geometry) {
-      // User entered the name of a Place that was not suggested and
-      // pressed the Enter key, or the Place Details request failed.
       window.alert("No details available for input: '" + place.name + "'");
       return;
     }
-
-    // If the place has a geometry, then present it on a map.
     if (place.geometry.viewport) {
       map.fitBounds(place.geometry.viewport);
     } else {
       map.setCenter(place.geometry.location);
-      map.setZoom(17); // Why 17? Because it looks good.
+      map.setZoom(17);
     }
     marker.setPosition(place.geometry.location);
     marker.setVisible(true);
@@ -62,42 +56,6 @@ function initMap() {
     infowindowContent.children["place-address"].textContent = address;
     infowindow.open(map, marker);
   });
-
-  // Sets a listener on a radio button to change the filter type on Places
-  // Autocomplete.
-  function setupClickListener(id, types) {
-    const radioButton = document.getElementById(id);
-    radioButton.addEventListener("click", () => {
-      autocomplete.setTypes(types);
-    });
-  }
-  setupClickListener("changetype-all", []);
-  setupClickListener("changetype-address", ["address"]);
-  setupClickListener("changetype-establishment", ["establishment"]);
-  setupClickListener("changetype-geocode", ["geocode"]);
-  document
-    .getElementById("use-strict-bounds")
-    .addEventListener("click", function () {
-      console.log("Checkbox clicked! New state=" + this.checked);
-      autocomplete.setOptions({ strictBounds: this.checked });
-    });
-}
-
-
-//Edit budget, location, duration//
-function saveDetails() {
-  var budgetRemain = document.getElementById('budget-remaining');
-  var budgetTotal = document.getElementById('budget-total');
-
-  var budgetTotalValue = document.getElementById('budgetField').value;
-  budgetRemain.innerHTML = '$' + budgetTotalValue;
-  budgetTotal.innerHTML = '/ $' + budgetTotalValue;
-
-  // var tripLocation = document.getElementById('location').value;
-  //document.getElementById('location').innerHTML = '<span class="text-black">'+ tripLocation + '</span';
-
-  var tripDuration = document.getElementById('durationField').value;
-  document.getElementById('duration').innerHTML = '<span class="text-black">' + tripDuration + '</span>';
 }
 
 
@@ -167,16 +125,9 @@ function addTransport() {
 
     let expInput = document.createElement('input');
     expInput.setAttribute('type','text');
-    expInput.placeholder = '0.00';
-    expInput.classList.add('form-control','text-box-expense');
-    expInput.id = 'transportExp';
-    expContainer.appendChild(expInput)
-
-    var expense = document.getElementById('transportExp').value;
-    budgetTotal = budgetTotal - parseInt(expense)
-    console.log(expense)
-    console.log(parseInt(expense))
-    budgetTotal.innerHTML = '$' + budgetTotal 
+    expInput.value = '0';
+    expInput.classList.add('form-control','text-box-expense', 'exp');
+    expContainer.appendChild(expInput);
 
     //space between housing expense and delete btn
     let spaceCol2 = document.createElement('div');
@@ -283,22 +234,22 @@ function addHousing() {
     housingExpLabel.classList.add('text-sm-b');
     housingExpLabel.appendChild(housingExpLabelText);
 
-    let housingExpContainer = document.createElement('div');
-    housingExpContainer.classList.add('input-group');
-    housingColC.appendChild(housingExpContainer);
+    let expContainer = document.createElement('div');
+    expContainer.classList.add('input-group');
+    housingColC.appendChild(expContainer);
 
     let housingExpSpan = document.createElement('span');
     housingExpSpan.classList.add('input-group-addon','my-auto');
-    housingExpContainer.appendChild(housingExpSpan);
+    expContainer.appendChild(housingExpSpan);
 
     let housingExpSpanText = document.createTextNode('$'); 
     housingExpSpan.appendChild(housingExpSpanText);
 
-    let housingExpInput = document.createElement('input');
-    housingExpInput.setAttribute('type','text');
-    housingExpInput.placeholder = '0.00';
-    housingExpInput.classList.add('form-control','text-box-expense');
-    housingExpContainer.appendChild(housingExpInput)
+    let expInput = document.createElement('input');
+    expInput.setAttribute('type','text');
+    expInput.value = '0';
+    expInput.classList.add('form-control','text-box-expense', 'exp');
+    expContainer.appendChild(expInput);
 
     //space between housing expense and delete btn
     let housingColD = document.createElement('div');
@@ -440,11 +391,11 @@ function addFood() {
   let expSpanText = document.createTextNode('$'); 
   expSpan.appendChild(expSpanText);
 
-  let expInput = document.createElement('input');
-  expInput.setAttribute('type','text');
-  expInput.placeholder = '0.00';
-  expInput.classList.add('form-control','text-box-expense');
-  expContainer.appendChild(expInput)
+    let expInput = document.createElement('input');
+    expInput.setAttribute('type','text');
+    expInput.value = '0';
+    expInput.classList.add('form-control','text-box-expense', 'exp');
+    expContainer.appendChild(expInput);
 
   //delete btn
   let deleteCol = document.createElement('div');
@@ -467,4 +418,42 @@ function addFood() {
   closeBtn.onclick = function(e) {
   foodContainer.remove();
   }
+}
+
+//Edit budget, location, duration//
+function saveDetails() {
+
+  var expense = document.querySelectorAll('.exp');
+  var expenseArr = [];
+    for (var i=0; i<expense.length; i++){
+        expenseArr.push(expense[i].value);
+    }
+    var expenseTotal = 0;
+    for(i=0; i<expenseArr.length; i++){
+        expenseTotal = expenseTotal + parseInt(expenseArr[i])
+    }
+    console.log(expenseArr)
+    console.log(expenseTotal)
+
+  if (expenseTotal != 0) {
+    var budget = document.getElementById('budgetField').value;
+    var budgetRemain = document.getElementById('budget-remaining');
+    budget = budget - expenseTotal
+    console.log(budget)
+    budgetRemain.innerHTML = '$' + budget;
+  }
+
+  else {
+    var budget = document.getElementById('budgetField').value;
+    var budgetRemain = document.getElementById('budget-remaining');
+    var budgetTotal = document.getElementById('budget-total');
+    budgetRemain.innerHTML = '$' + budget;
+    budgetTotal.innerHTML = '/ $' + budget;
+  }
+
+  var tripLocation = document.getElementById('pac-input').value;
+  document.getElementById('location').innerHTML = '<span class="text-black">'+ tripLocation + '</span';
+
+  var tripDuration = document.getElementById('durationField').value;
+  document.getElementById('duration').innerHTML = '<span class="text-black">' + tripDuration + '</span>';
 }
