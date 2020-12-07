@@ -58,11 +58,24 @@ function initMap() {
   });
 }
 
+// creating objects for Trip
 
-function addTransport() {
-    var budgetRemain = document.getElementById('budget-remaining');
-    var budgetTotal = document.getElementById('budget-total');
-    
+var tripLocation = document.getElementById('pac-input').value;
+var tripDuration = document.getElementById('durationField').value;
+var transportArr = []
+var housingArr = []
+var foodArr = []
+
+var trip = {
+    budget: budgetField.value,
+    duration: tripDuration,
+    location: tripLocation,
+    transportation: transportArr,
+    housing: housingArr,
+    food: foodArr,
+}
+
+function addTransport() {    
     var parentEl = document.getElementById('transportEl')
 
     let transportContainer = document.createElement('div');
@@ -182,6 +195,13 @@ function addTransport() {
     notesInput.classList.add('form-control','text-box');
     notesInput.rows = 4;
     notesContainer.appendChild(notesInput); 
+
+    const transport = {
+    name: nameInput.value,
+    expense: expInput.value,
+    notes: notesInput.value,
+    }
+    transportArr.push(transport);
 }
 
 function addHousing() {
@@ -331,6 +351,13 @@ function addHousing() {
     notesInput.classList.add('form-control','text-box');
     notesInput.rows = 4;
     notesContainer.appendChild(notesInput); 
+
+    const housing = {
+    name: nameInput.value,
+    expense: expInput.value,
+    notes: notesInput.value,
+    }
+    housingArr.push(housing);
 }
 
 function addFood() {
@@ -357,10 +384,10 @@ function addFood() {
   let foodLabelText = document.createTextNode('Name');
   foodLabel.appendChild(foodLabelText);
 
-  let foodInput = document.createElement('input');
-  foodInput.setAttribute('type','text');
-  foodInput.classList.add('form-control','text-box');
-  foodLabel.appendChild(foodInput); 
+  let nameInput = document.createElement('input');
+  nameInput.setAttribute('type','text');
+  nameInput.classList.add('form-control','text-box');
+  foodLabel.appendChild(nameInput); 
 
   //space between input name and expense
 
@@ -418,11 +445,16 @@ function addFood() {
   closeBtn.onclick = function(e) {
   foodContainer.remove();
   }
+
+  const food = {
+    name: nameInput.value,
+    expense: expInput.value,
+    }
+    foodArr.push(food);
 }
 
 //Edit budget, location, duration//
 function saveDetails() {
-
   var expense = document.querySelectorAll('.exp');
   var expenseArr = [];
     for (var i=0; i<expense.length; i++){
@@ -456,4 +488,9 @@ function saveDetails() {
 
   var tripDuration = document.getElementById('durationField').value;
   document.getElementById('duration').innerHTML = '<span class="text-black">' + tripDuration + '</span>';
+
+}
+
+function saveTrip() {
+    localStorage.setItem('trip', JSON.stringify(trip));
 }
