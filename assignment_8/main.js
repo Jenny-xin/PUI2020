@@ -58,23 +58,6 @@ function initMap() {
   });
 }
 
-// creating objects for Trip
-
-var tripLocation = document.getElementById('pac-input').value;
-var tripDuration = document.getElementById('durationField').value;
-var transportArr = []
-var housingArr = []
-var foodArr = []
-
-var trip = {
-    budget: budgetField.value,
-    duration: tripDuration,
-    location: tripLocation,
-    transportation: transportArr,
-    housing: housingArr,
-    food: foodArr,
-}
-
 function addTransport() {    
     var parentEl = document.getElementById('transportEl')
 
@@ -102,10 +85,10 @@ function addTransport() {
     nameContainer.classList.add('input-group');
     serviceCol.appendChild(nameContainer);
 
-    let nameInput = document.createElement('input');
-    nameInput.setAttribute('type','text');
-    nameInput.classList.add('form-control','text-box');
-    nameContainer.appendChild(nameInput);
+    let tNameInput = document.createElement('input');
+    tNameInput.setAttribute('type','text');
+    tNameInput.classList.add('form-control','text-box');
+    nameContainer.appendChild(tNameInput);
 
     //space between service and expense
     let spaceCol = document.createElement('div');
@@ -195,13 +178,6 @@ function addTransport() {
     notesInput.classList.add('form-control','text-box');
     notesInput.rows = 4;
     notesContainer.appendChild(notesInput); 
-
-    const transport = {
-    name: nameInput.value,
-    expense: expInput.value,
-    notes: notesInput.value,
-    }
-    transportArr.push(transport);
 }
 
 function addHousing() {
@@ -455,6 +431,10 @@ function addFood() {
 
 //Edit budget, location, duration//
 function saveDetails() {
+    var budget = document.getElementById('budgetField').value;
+    var budgetRemain = document.getElementById('budget-remaining');
+    var budgetTotal = document.getElementById('budget-total');
+  
   var expense = document.querySelectorAll('.exp');
   var expenseArr = [];
     for (var i=0; i<expense.length; i++){
@@ -464,21 +444,14 @@ function saveDetails() {
     for(i=0; i<expenseArr.length; i++){
         expenseTotal = expenseTotal + parseInt(expenseArr[i])
     }
-    console.log(expenseArr)
-    console.log(expenseTotal)
 
   if (expenseTotal != 0) {
-    var budget = document.getElementById('budgetField').value;
-    var budgetRemain = document.getElementById('budget-remaining');
+    budgetTotal.innerHTML = '/ $' + budget;
     budget = budget - expenseTotal
-    console.log(budget)
     budgetRemain.innerHTML = '$' + budget;
   }
 
   else {
-    var budget = document.getElementById('budgetField').value;
-    var budgetRemain = document.getElementById('budget-remaining');
-    var budgetTotal = document.getElementById('budget-total');
     budgetRemain.innerHTML = '$' + budget;
     budgetTotal.innerHTML = '/ $' + budget;
   }
@@ -492,5 +465,34 @@ function saveDetails() {
 }
 
 function saveTrip() {
+    var tripLocation = document.getElementById('pac-input').value;
+    var tripDuration = document.getElementById('durationField').value;
+    
+    var transportArr = []
+    var housingArr = []
+    var foodArr = []
+
+    const transport = {
+    name: nameInput.value,
+    expense: expInput.value,
+    notes: notesInput.value,
+    }
+
+    console.log(nameInput.value)
+    console.log(expInput.value)
+    console.log(notesInput.value)
+    transportArr.push(transport);
+
+
+    var trip = {
+    budget: budgetField.value,
+    duration: tripDuration,
+    location: tripLocation,
+    transportation: transportArr,
+    housing: housingArr,
+    food: foodArr,
+}
     localStorage.setItem('trip', JSON.stringify(trip));
+    console.log(trip)
+    console.log(transportArr)
 }
