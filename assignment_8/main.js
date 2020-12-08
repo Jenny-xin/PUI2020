@@ -1,3 +1,5 @@
+
+
 //Google Maps section //
 function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
@@ -122,7 +124,7 @@ function addTransport() {
     let expInput = document.createElement('input');
     expInput.setAttribute('type','text');
     expInput.value = '0';
-    expInput.classList.add('form-control','text-box-expense', 'tExpInput');
+    expInput.classList.add('form-control','text-box-expense', 'exp', 'tExpInput');
     expContainer.appendChild(expInput);
 
     //space between housing expense and delete btn
@@ -184,7 +186,7 @@ function addHousing() {
     let parentEl = document.getElementById('housingEl');
 
     let housingContainer = document.createElement('div');
-    housingContainer.classList.add ('container-large');
+    housingContainer.classList.add ('container-large','housingContainer');
     parentEl.appendChild(housingContainer);
 
     let housingRowA = document.createElement('div');
@@ -209,7 +211,7 @@ function addHousing() {
 
     let nameInput = document.createElement('input');
     nameInput.setAttribute('type','text');
-    nameInput.classList.add('form-control','text-box');
+    nameInput.classList.add('form-control','text-box','hNameInput');
     nameContainer.appendChild(nameInput);
 
     //space between hotel name and expense
@@ -244,7 +246,7 @@ function addHousing() {
     let expInput = document.createElement('input');
     expInput.setAttribute('type','text');
     expInput.value = '0';
-    expInput.classList.add('form-control','text-box-expense', 'exp');
+    expInput.classList.add('form-control','text-box-expense', 'exp', 'hExpInput');
     expContainer.appendChild(expInput);
 
     //space between housing expense and delete btn
@@ -297,7 +299,7 @@ function addHousing() {
     addressCol.appendChild(addressContainer);
 
     let addressInput = document.createElement('textarea');
-    addressInput.classList.add('form-control','text-box');
+    addressInput.classList.add('form-control','text-box', 'addressInput');
     addressInput.rows = 4;
     addressContainer.appendChild(addressInput); 
 
@@ -324,16 +326,9 @@ function addHousing() {
     notesCol.appendChild(notesContainer);
 
     let notesInput = document.createElement('textarea');
-    notesInput.classList.add('form-control','text-box');
+    notesInput.classList.add('form-control','text-box','hNotesInput');
     notesInput.rows = 4;
     notesContainer.appendChild(notesInput); 
-
-    const housing = {
-    name: nameInput.value,
-    expense: expInput.value,
-    notes: notesInput.value,
-    }
-    housingArr.push(housing);
 }
 
 function addFood() {
@@ -342,7 +337,7 @@ function addFood() {
   let foodEl = document.getElementById('foodEl');
 
   let foodContainer = document.createElement('div');
-  foodContainer.classList.add('container-large');
+  foodContainer.classList.add('container-large', 'foodContainer');
   foodEl.appendChild(foodContainer);
 
   let foodRow = document.createElement('div');
@@ -362,7 +357,7 @@ function addFood() {
 
   let nameInput = document.createElement('input');
   nameInput.setAttribute('type','text');
-  nameInput.classList.add('form-control','text-box');
+  nameInput.classList.add('form-control','text-box', 'fNameInput');
   foodLabel.appendChild(nameInput); 
 
   //space between input name and expense
@@ -397,7 +392,7 @@ function addFood() {
     let expInput = document.createElement('input');
     expInput.setAttribute('type','text');
     expInput.value = '0';
-    expInput.classList.add('form-control','text-box-expense', 'exp');
+    expInput.classList.add('form-control','text-box-expense', 'exp', 'fExpInput');
     expContainer.appendChild(expInput);
 
   //delete btn
@@ -450,6 +445,8 @@ function saveDetails() {
     budgetTotal.innerHTML = '/ $' + budget;
   }
 
+  console.log(budget)
+
   var tripLocation = document.getElementById('pac-input').value;
   document.getElementById('location').innerHTML = '<span class="text-black">'+ tripLocation + '</span';
 
@@ -468,34 +465,34 @@ function saveTrip() {
 
 
     var transportObjs = document.querySelectorAll('.transportContainer');
-    var transportObjsArr = [];
-
-    for (var i=0; i<transportObjs.length; i++){
-        transportObjsArr.push(transportObjs[i])
-    }
-    console.log(transportObjsArr)
-
-    for (i=0; i<transportObjsArr.length; i++) {
+    for (const transportObj of transportObjs) {
         const transport = {
-        name: document.querySelector('.tNameInput').value,
-        expense: document.querySelector('.tExpInput').value,
-        notes: document.querySelector('.tNotesInput').value,
+        name: transportObj.querySelector('.tNameInput').value,
+        expense: transportObj.querySelector('.tExpInput').value,
+        notes: transportObj.querySelector('.tNotesInput').value,
         }
         transportArr.push(transport)
     }
-    console.log(transportArr)
 
-    // const transport = {
-    // name: nameInput.value,
-    // expense: expInput.value,
-    // notes: notesInput.value,
-    // }
+    var housingObjs = document.querySelectorAll('.housingContainer');
+    for (const housingObj of housingObjs) {
+        const housing = {
+        name: housingObj.querySelector('.hNameInput').value,
+        address: housingObj.querySelector('.addressInput').value,
+        expense: housingObj.querySelector('.hExpInput').value,
+        notes: housingObj.querySelector('.hNotesInput').value,
+        }
+        housingArr.push(housing)
+    }
 
-    // console.log(nameInput.value)
-    // console.log(expInput.value)
-    // console.log(notesInput.value)
-    // transportArr.push(transport);
-
+    var foodObjs = document.querySelectorAll('.foodContainer');
+    for (const foodObj of foodObjs) {
+        const food = {
+        name: foodObj.querySelector('.fNameInput').value,
+        expense: foodObj.querySelector('.fExpInput').value,
+        }
+        foodArr.push(food)
+    }
 
     var trip = {
     budget: budgetField.value,
@@ -507,5 +504,4 @@ function saveTrip() {
 }
     localStorage.setItem('trip', JSON.stringify(trip));
     console.log(trip)
-    console.log(transportArr)
 }
