@@ -58,11 +58,11 @@
 <!----------------------- Left-hand column -------------------------->
 		<div class="row">
 			<div class="col-3 overview sticky-top">
-				<div class="row">
+				<div class="row justify-content-center">
 					<img src="Assets/Logo.png" alt="Trip Planner logo" class="logo img-responsive">
 				</div>
 				
-				<div class="row">
+				<div class="row justify-content-center">
 					<button type="button" class="btn btn-sm btn-edit text-center" data-toggle="modal" data-target="#editModal">Edit Trip Details</button>
 					<div class="budget-container">
 						<p class="text-center" id="text-white">Budget</p>
@@ -71,8 +71,8 @@
 					</div>
 				</div>
 
-				<div class="row">
-					<div class="details-container align-items-center">
+				<div class="row justify-content-center">
+					<div class="details-container">
 						<div id="duration-container">
 							<p class="text-sm-p">Duration</p>
 							<p class="text-gray" id="duration">When will your trip be?</p>
@@ -84,13 +84,13 @@
 					</div>
 				</div>
 
-				<div class="row no-gutters">
-					<div class="col text-center">
+				<div class="row justify-content-center">
+					<div class="pull-left">
 						<button type="button" class="btn btn-sm btn-save-trip" onclick="saveTrip()">Save Trip
 						</button>
 					</div>
 
-					<div class="col text-center">
+					<div class="pull-right">
 						<button type="button" class="btn btn-sm btn-reset-trip">Reset Trip
 						</button>
 					</div>
@@ -106,10 +106,10 @@
 					</div>
 
 					<div class="row">
-							<div class="col-1">
+							<div class="pull-left">
 								<input type="button" value="Save" class="btn-save" onclick="saveDetails()">
 							</div>
-							<div class="col-1">
+							<div class="pull-right">
 								<input type="button" value="Add" class="btn-add" onclick="addTransport()">
 							</div>
 					</div>
@@ -120,10 +120,10 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-1">
+						<div class="pull-left">
 							<input type="button" value="Save" class="btn-save" onclick="saveDetails()">
 						</div>
-						<div class="col-1">
+						<div class="pull-right">
 							<input type="button" value="Add" class="btn-add" onclick="addHousing()">
 						</div>
 					</div>
@@ -134,13 +134,15 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-1">
+						<div class="pull-left">
 							<input type="button" value="Save" class="btn-save" onclick="saveDetails()">
 						</div>
-						<div class="col-1">
+						<div class="pull-right">
 							<input type="button" value="Add" class="btn-add" onclick="addFood()">
 						</div>
 					</div>
+			</div>
+		</div>
 
 
 

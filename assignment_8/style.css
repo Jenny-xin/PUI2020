@@ -1,3 +1,13 @@
+*@media (min-width: 768px) {
+	.col-sm {
+		width: 100%;
+	}
+	.col-sm-1 {
+		width: 100%;
+	}
+}
+
+
 body {
 	margin: 0px;
 	background-color: #F4F5FF;
@@ -101,6 +111,7 @@ body {
 	outline: none;
 	border-radius: 20px;
 	padding: 2%;
+	margin-left: 10%;
 }
 
 .btn-transport {
@@ -123,7 +134,7 @@ body {
 }
 
 .btn-save-trip {
-	width: 85%;
+	width: 100px;
 	height: 30px;
 	background: #6373DF;
 	font-family: 'Roboto';
@@ -136,7 +147,7 @@ body {
 }
 
 .btn-reset-trip {
-	width: 85%;
+	width: 100px;
 	height: 30px;
 	background: white;
 	font-family: 'Roboto';

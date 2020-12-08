@@ -62,7 +62,7 @@ function addTransport() {
     var parentEl = document.getElementById('transportEl')
 
     let transportContainer = document.createElement('div');
-    transportContainer.classList.add ('container-large');
+    transportContainer.classList.add ('container-large', 'transportContainer');
     parentEl.appendChild(transportContainer);
 
     let transportRow = document.createElement('div');
@@ -85,10 +85,10 @@ function addTransport() {
     nameContainer.classList.add('input-group');
     serviceCol.appendChild(nameContainer);
 
-    let tNameInput = document.createElement('input');
-    tNameInput.setAttribute('type','text');
-    tNameInput.classList.add('form-control','text-box');
-    nameContainer.appendChild(tNameInput);
+    let nameInput = document.createElement('input');
+    nameInput.setAttribute('type','text');
+    nameInput.classList.add('form-control','text-box', 'tNameInput');
+    nameContainer.appendChild(nameInput);
 
     //space between service and expense
     let spaceCol = document.createElement('div');
@@ -122,7 +122,7 @@ function addTransport() {
     let expInput = document.createElement('input');
     expInput.setAttribute('type','text');
     expInput.value = '0';
-    expInput.classList.add('form-control','text-box-expense', 'exp');
+    expInput.classList.add('form-control','text-box-expense', 'tExpInput');
     expContainer.appendChild(expInput);
 
     //space between housing expense and delete btn
@@ -175,7 +175,7 @@ function addTransport() {
     notesCol.appendChild(notesContainer);
 
     let notesInput = document.createElement('textarea');
-    notesInput.classList.add('form-control','text-box');
+    notesInput.classList.add('form-control','text-box', 'tNotesInput');
     notesInput.rows = 4;
     notesContainer.appendChild(notesInput); 
 }
@@ -421,12 +421,6 @@ function addFood() {
   closeBtn.onclick = function(e) {
   foodContainer.remove();
   }
-
-  const food = {
-    name: nameInput.value,
-    expense: expInput.value,
-    }
-    foodArr.push(food);
 }
 
 //Edit budget, location, duration//
@@ -472,16 +466,35 @@ function saveTrip() {
     var housingArr = []
     var foodArr = []
 
-    const transport = {
-    name: nameInput.value,
-    expense: expInput.value,
-    notes: notesInput.value,
-    }
 
-    console.log(nameInput.value)
-    console.log(expInput.value)
-    console.log(notesInput.value)
-    transportArr.push(transport);
+    var transportObjs = document.querySelectorAll('.transportContainer');
+    var transportObjsArr = [];
+
+    for (var i=0; i<transportObjs.length; i++){
+        transportObjsArr.push(transportObjs[i])
+    }
+    console.log(transportObjsArr)
+
+    for (i=0; i<transportObjsArr.length; i++) {
+        const transport = {
+        name: document.querySelector('.tNameInput').value,
+        expense: document.querySelector('.tExpInput').value,
+        notes: document.querySelector('.tNotesInput').value,
+        }
+        transportArr.push(transport)
+    }
+    console.log(transportArr)
+
+    // const transport = {
+    // name: nameInput.value,
+    // expense: expInput.value,
+    // notes: notesInput.value,
+    // }
+
+    // console.log(nameInput.value)
+    // console.log(expInput.value)
+    // console.log(notesInput.value)
+    // transportArr.push(transport);
 
 
     var trip = {
