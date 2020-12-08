@@ -1,12 +1,11 @@
-*@media (min-width: 768px) {
-	.col-sm {
-		width: 100%;
-	}
-	.col-sm-1 {
-		width: 100%;
-	}
+@media only screen and (max-width: 576px) {
+.overview {
+	background-color: white;
+	height: 100vh;
+	padding: 2%;
+	z-index: 5000;
 }
-
+}
 
 body {
 	margin: 0px;
@@ -165,6 +164,7 @@ body {
 	background-color: white;
 	height: 100vh;
 	padding: 2%;
+	/*min-width: 250px;*/
 }
 
 .logo {

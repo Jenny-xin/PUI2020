@@ -1,5 +1,3 @@
-
-
 //Google Maps section //
 function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
@@ -180,6 +178,8 @@ function addTransport() {
     notesInput.classList.add('form-control','text-box', 'tNotesInput');
     notesInput.rows = 4;
     notesContainer.appendChild(notesInput); 
+
+    return transportContainer;
 }
 
 function addHousing() {
@@ -502,6 +502,36 @@ function saveTrip() {
     housing: housingArr,
     food: foodArr,
 }
-    localStorage.setItem('trip', JSON.stringify(trip));
+    var storedTrip = localStorage.setItem('trip', JSON.stringify(trip));
     console.log(trip)
+}
+
+//clear localStorage
+function resetTrip() {
+    localStorage.clear()
+}
+
+
+//retrieve localStorage if trip is saved
+function loadTrip() {
+    var parsedTrip = JSON.parse(localStorage.getItem('trip'));
+    // var tripArr = Object.entries(parsedTrip)
+    console.log(parsedTrip);
+    // console.log(tripArr)
+
+    document.getElementById('pac-input').value = parsedTrip["location"]
+     // tripArr[2][1]
+    document.getElementById('durationField').value = parsedTrip["duration"]
+    document.getElementById('budgetField').value = parsedTrip["budget"]
+    saveDetails()
+
+    var transportObjs = parsedTrip["transportation"];
+    for (const transportObj of transportObjs) {
+        let transportContainer = addTransport()
+        console.log(transportObj);
+        transportContainer.querySelector('.tNameInput').value = transportObj["name"]
+        transportContainer.querySelector('.tExpInput').value = transportObj["expense"]
+        transportContainer.querySelector('.tNotesInput').value = transportObj["notes"]
+    }
+
 }
