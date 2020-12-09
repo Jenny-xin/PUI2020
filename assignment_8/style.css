@@ -77,8 +77,8 @@ body {
 	outline: none;
 }
 
-.btn-save {
-	min-width: 70px;
+.btn-add {
+	width: 70px;
 	height: 25px;
 	background: #6373DF;
 	font-family: 'Roboto';
@@ -90,18 +90,18 @@ body {
 	padding: 2%;
 }
 
-.btn-add {
-	min-width: 70px;
-	height: 25px;
-	background: #F4F5FF;
+.btn-expense {
 	font-family: 'Roboto';
 	font-size: 12px;
+	background: none;
 	color: #6373DF;
-	border: solid 2px #6373DF;
+	border: none;
 	outline: none;
-	border-radius: 20px;
-	padding: 2%;
-	margin-left: 10%;
+	margin-left: 10px;
+}
+
+.btn-expense:hover {
+	text-decoration: underline;
 }
 
 .btn-transport {
@@ -148,12 +148,18 @@ body {
 	border-radius: 20px;
 	padding: 4%;
 	margin-bottom: 10%;
+	margin-left: 20px;
 }
 
 .row-no-margin {
 	margin-left: 0;
 	margin-right: 0;
 }
+
+.modal .modal-body {    
+    overflow-y: auto;
+    max-height: 350px;
+  }
 /* content for overview section (left white column) */
 
 .sidebar {

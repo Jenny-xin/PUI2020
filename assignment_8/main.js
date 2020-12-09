@@ -129,7 +129,7 @@ function addTransport() {
     expInput.classList.add('form-control','text-box-expense', 'exp', 'tExpInput');
     expContainer.appendChild(expInput);
 
-    //space between housing expense and delete btn
+    //space between transportation expense and delete btn
     let spaceCol2 = document.createElement('div');
     spaceCol2.classList.add('col-1');
     transportRow.appendChild(spaceCol2);
