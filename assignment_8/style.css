@@ -1,14 +1,5 @@
-@media only screen and (max-width: 576px) {
-.overview {
-	background-color: white;
-	height: 100vh;
-	padding: 2%;
-	z-index: 5000;
-}
-}
-
 body {
-	margin: 0px;
+	margin: 0;
 	background-color: #F4F5FF;
 }
 
@@ -142,7 +133,7 @@ body {
 	outline: none;
 	border-radius: 20px;
 	padding: 4%;
-	margin-top: 10%;
+	margin-bottom: 15%;
 }
 
 .btn-reset-trip {
@@ -156,20 +147,27 @@ body {
 	outline: none;
 	border-radius: 20px;
 	padding: 4%;
-	margin-top: 10%;
+	margin-bottom: 10%;
 }
 
+.row-no-margin {
+	margin-left: 0;
+	margin-right: 0;
+}
 /* content for overview section (left white column) */
-.overview {
+
+.sidebar {
+	margin: 0;
+	padding: 3% 2%;
+	width: 310px;
 	background-color: white;
+	position: absolute;
 	height: 100vh;
-	padding: 2%;
-	/*min-width: 250px;*/
 }
 
 .logo {
 	width: 40%;
-	margin: -5% 8% 0%;
+	margin: 0% 8% 0%;
 }
 
 .budget-container {
@@ -217,8 +215,14 @@ body {
 }
 
 /* content for right-hand section */
-.content-container {
-	margin: -2% 3% 3%;
+
+div.content {
+	margin-left: 350px;
+	margin-right: 10px;
+}
+
+.col-no-margin {
+	margin: 0;
 }
 
 .text-box {
@@ -250,7 +254,8 @@ body {
 }
 
 .container-large {
-	width: 100%;
+	min-width: 400px;
+	width: 95%;
 	height: 100%;
 	background-color: white;
 	border-radius: 20px;

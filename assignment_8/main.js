@@ -1,13 +1,20 @@
+var autocomplete;
+
 //Google Maps section //
 function initMap() {
+  var initialMapCenter =  { lat: 40.440624, lng:  -79.995888};
+  var parsedTrip = JSON.parse(localStorage.getItem('trip'));
+  if(parsedTrip && parsedTrip["mapcenter"] !== undefined) {
+    initialMapCenter = parsedTrip["mapcenter"];
+  }
   const map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: 40.440624, lng:  -79.995888},
+    center: initialMapCenter,
     zoom: 13,
   });
   const card = document.getElementById("pac-card");
   const input = document.getElementById("pac-input");
 
-  const autocomplete = new google.maps.places.Autocomplete(input);
+  autocomplete = new google.maps.places.Autocomplete(input);
 
   autocomplete.bindTo("bounds", map);
 
@@ -19,6 +26,7 @@ function initMap() {
     map,
     anchorPoint: new google.maps.Point(0, -29),
   });
+
   autocomplete.addListener("place_changed", () => {
     infowindow.close();
     marker.setVisible(false);
@@ -51,10 +59,6 @@ function initMap() {
           "",
       ].join(" ");
     }
-    infowindowContent.children["place-icon"].src = place.icon;
-    infowindowContent.children["place-name"].textContent = place.name;
-    infowindowContent.children["place-address"].textContent = address;
-    infowindow.open(map, marker);
   });
 }
 
@@ -328,7 +332,9 @@ function addHousing() {
     let notesInput = document.createElement('textarea');
     notesInput.classList.add('form-control','text-box','hNotesInput');
     notesInput.rows = 4;
-    notesContainer.appendChild(notesInput); 
+    notesContainer.appendChild(notesInput);
+
+    return housingContainer 
 }
 
 function addFood() {
@@ -416,6 +422,8 @@ function addFood() {
   closeBtn.onclick = function(e) {
   foodContainer.remove();
   }
+
+  return foodContainer
 }
 
 //Edit budget, location, duration//
@@ -445,8 +453,6 @@ function saveDetails() {
     budgetTotal.innerHTML = '/ $' + budget;
   }
 
-  console.log(budget)
-
   var tripLocation = document.getElementById('pac-input').value;
   document.getElementById('location').innerHTML = '<span class="text-black">'+ tripLocation + '</span';
 
@@ -456,6 +462,11 @@ function saveDetails() {
 }
 
 function saveTrip() {
+  // var place = autocomplete.getPlace();
+  // var mapCenter = { 
+  //       'lat': place?place.geometry.location.lat():40.440624,
+  //     'lng': place?place.geometry.location.lng():-79.995888,
+  //   }
     var tripLocation = document.getElementById('pac-input').value;
     var tripDuration = document.getElementById('durationField').value;
     
@@ -495,6 +506,7 @@ function saveTrip() {
     }
 
     var trip = {
+    //mapcenter: mapCenter,
     budget: budgetField.value,
     duration: tripDuration,
     location: tripLocation,
@@ -509,29 +521,47 @@ function saveTrip() {
 //clear localStorage
 function resetTrip() {
     localStorage.clear()
+    location.reload()
 }
 
 
 //retrieve localStorage if trip is saved
 function loadTrip() {
     var parsedTrip = JSON.parse(localStorage.getItem('trip'));
-    // var tripArr = Object.entries(parsedTrip)
     console.log(parsedTrip);
-    // console.log(tripArr)
 
-    document.getElementById('pac-input').value = parsedTrip["location"]
-     // tripArr[2][1]
-    document.getElementById('durationField').value = parsedTrip["duration"]
-    document.getElementById('budgetField').value = parsedTrip["budget"]
-    saveDetails()
+    if (parsedTrip == undefined) {
+      return
+    }
+
+    document.getElementById('pac-input').value = parsedTrip["location"];
+    document.getElementById('durationField').value = parsedTrip["duration"];
+    document.getElementById('budgetField').value = parsedTrip["budget"];
 
     var transportObjs = parsedTrip["transportation"];
     for (const transportObj of transportObjs) {
         let transportContainer = addTransport()
         console.log(transportObj);
-        transportContainer.querySelector('.tNameInput').value = transportObj["name"]
-        transportContainer.querySelector('.tExpInput').value = transportObj["expense"]
-        transportContainer.querySelector('.tNotesInput').value = transportObj["notes"]
+        transportContainer.querySelector('.tNameInput').value = transportObj["name"];
+        transportContainer.querySelector('.tExpInput').value = transportObj["expense"];
+        transportContainer.querySelector('.tNotesInput').value = transportObj["notes"];
     }
 
+    var housingObjs = parsedTrip["housing"];
+    for (const housingObj of housingObjs) {
+        let housingContainer = addHousing()
+        housingContainer.querySelector('.hNameInput').value = housingObj["name"];
+        housingContainer.querySelector('.hExpInput').value = housingObj["expense"];
+        housingContainer.querySelector('.addressInput').value = housingObj["address"];
+        housingContainer.querySelector('.hNotesInput').value = housingObj["notes"];
+    }
+
+    var foodObjs = parsedTrip["food"];
+    for (const foodObj of foodObjs) {
+        let foodContainer = addFood()
+        foodContainer.querySelector('.fNameInput').value = foodObj["name"];
+        foodContainer.querySelector('.fExpInput').value = foodObj["expense"];
+    }
+
+    saveDetails();
 }
