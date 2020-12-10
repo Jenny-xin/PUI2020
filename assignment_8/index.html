@@ -55,18 +55,18 @@
 			</div>
 		</div>
 <!----------------------- Left-hand column -------------------------->
+		<button class="hamburgerMenu navbar-toggler d-block d-md-none align-top" type="button" data-toggle="collapse" data-target="#sidebar" id="sidebarCollapse">
+			<img src="Assets/Hamburger-menu.png" alt="hamburger menu" class="hamburger-icon img-responsive">
+		</button>
+
 		<div class="row row-no-margin">
 			<nav>
-				<button class="navbar-toggler d-block d-lg-none" type="button" data-toggle="collapse" data-target="#sidebar" id="sidebarCollapse">
-					<div id="icon">
-						<span></span>
-						<span></span>
-						<span></span>
-					</div>
-				</button>
-			<div class="sidebar" id="sidebar">
-				<div class="row justify-content-center">
+			<div id="sidebar">
+				<div class="row">
 					<img src="Assets/Logo.png" alt="Trip Planner logo" class="logo img-responsive">
+					<button class="navbar-toggler d-block d-md-none exit-btn align-top" type="button" data-toggle="collapse" data-target="#sidebar" id="sidebarCollapse">
+						<img src="Assets/DeleteBtn.svg" alt="delete button" class="exitIcon img-responsive">
+					</button>
 				</div>
 				
 				<div class="row justify-content-center">
@@ -104,12 +104,7 @@
 
 <!----------------------- Right-hand column ------------------------>
 			<div class="col content">
-<!-- 				<input type="checkbox" id="sidebarToggle" onclick="sidebarToggle()">
-				<label id="hamburgerMenu" class="btn d-block d-md-none" for="sidebarToggle">
-					<span></span> 
-					<span></span>
-					<span></span>
-				</label> -->
+<!-- 				<input type="checkbox" id="sidebarToggle" onclick="sidebarToggle()">-->
 					<div class="row" id="transportEl">
 						<p class="text-header">Transportation</p>
 						<div>
@@ -157,20 +152,17 @@
 
 		<script>
 			$(document).ready(function () {
-			//   $('.first-button').on('click', function () {
-			//     $('.icon').toggleClass('open');
-			//   });
-			// });
-
 			$('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-                $('.collapse.in').toggleClass('in');
+           		$('#sidebar').toggleClass('active');
+            	$('.collapse.in').toggleClass('in');
+                });
+        });
 		</script>
 
 
 		<script src="main.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-		<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAB1KpV4SyvSzQjPlcJ_lyUKHZ2y10w9xw&libraries=places&callback=initMap"></script> -->
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAB1KpV4SyvSzQjPlcJ_lyUKHZ2y10w9xw&libraries=places&callback=initMap"></script>
 	</body>
 </html>

@@ -166,6 +166,10 @@ body {
 	display: none;
 }*/
 
+.exitIcon {
+	width: 15px;
+}
+
 .row-no-margin {
 	margin-left: 0;
 	margin-right: 0;
@@ -177,31 +181,30 @@ body {
   }
 /* content for overview section (left white column) */
 
-.sidebar {
+#sidebar {
 	margin: 0;
 	padding: 3% 2%;
 	width: 310px;
 	height: 100%;
 	background-color: white;
 	position: fixed;
-	z-index: 4000;
+	z-index: 10;
 	top: 0;
 	left: 0;
 }
 
-#icon span {
-	background: #6373DF;
-	width: 30px;
-	height: 5px;
-	margin-top: 5px;
-/*	display: hide;*/
-	position: relative;
-	margin-bottom: 4px;
-	border-radius: 10px;
-	z-index: 1;
+.no-margin {
+	margin: 0;
 }
 
 .logo {
+	width: 40%;
+	margin-top: 0;
+	margin-right: 90px;
+	margin-left: 35px;
+}
+
+.hamburger-icon {
 	width: 40%;
 	margin: 0% 8% 0%;
 }
@@ -309,21 +312,23 @@ body {
 		padding-top: 15px;
 	}
 }*/
+@media (min-width: 768px) {
+	#sidebar {
+		display: block;
+	}
+}
 
 @media (max-width: 768px) {
-	.sidebar {
+	#sidebar {
 		margin-left: -310px;
 	}
 
-	.sidebar.active {
+	#sidebar.active {
 		margin-left: 0;
+		transition: all 0.4s;
 	}
 
 	.content {
 		margin-left: 10px;
 	}
-
-/*	#icon {
-		display: block;
-	}*/
 }

@@ -471,11 +471,11 @@ function saveDetails() {
 }
 
 function saveTrip() {
-  // var place = autocomplete.getPlace();
-  // var mapCenter = { 
-  //       'lat': place?place.geometry.location.lat():40.440624,
-  //     'lng': place?place.geometry.location.lng():-79.995888,
-  //   }
+  var place = autocomplete.getPlace();
+  var mapCenter = { 
+        'lat': place?place.geometry.location.lat():40.440624,
+      'lng': place?place.geometry.location.lng():-79.995888,
+    }
     var tripLocation = document.getElementById('pac-input').value;
     var tripDuration = document.getElementById('durationField').value;
     
@@ -515,7 +515,7 @@ function saveTrip() {
     }
 
     var trip = {
-    //mapcenter: mapCenter,
+    mapcenter: mapCenter,
     budget: budgetField.value,
     duration: tripDuration,
     location: tripLocation,
