@@ -1,3 +1,12 @@
+// function sidebarToggle() {
+//     var checkbox = document.getElementById('sidebarToggle');
+//     var sidebar = document.getElementById('hamburgerMenu');
+//     if (sidebar.checked) {
+//         sidebar.classList.add('show')
+//         console.log('toggle works')
+//     }
+// }
+
 var autocomplete;
 
 //Google Maps section //

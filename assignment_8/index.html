@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 	<link href='https://fonts.googleapis.com/css?family=PublicSans' rel='stylesheet'>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 	<title>Trip Planner</title>
 	</head>
 
@@ -53,11 +54,17 @@
 				</div>
 			</div>
 		</div>
-
-
 <!----------------------- Left-hand column -------------------------->
 		<div class="row row-no-margin">
-			<div class="col sidebar">
+			<nav>
+				<button class="navbar-toggler d-block d-lg-none" type="button" data-toggle="collapse" data-target="#sidebar" id="sidebarCollapse">
+					<div id="icon">
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+				</button>
+			<div class="sidebar" id="sidebar">
 				<div class="row justify-content-center">
 					<img src="Assets/Logo.png" alt="Trip Planner logo" class="logo img-responsive">
 				</div>
@@ -93,9 +100,16 @@
 					</div>
 				</div>
 			</div>
+		</nav>
 
 <!----------------------- Right-hand column ------------------------>
 			<div class="col content">
+<!-- 				<input type="checkbox" id="sidebarToggle" onclick="sidebarToggle()">
+				<label id="hamburgerMenu" class="btn d-block d-md-none" for="sidebarToggle">
+					<span></span> 
+					<span></span>
+					<span></span>
+				</label> -->
 					<div class="row" id="transportEl">
 						<p class="text-header">Transportation</p>
 						<div>
@@ -118,7 +132,7 @@
 					</div>
 					<div class="row">
 						<div class="pull-left">
-							<input type="button" value="Add" class="btn-add" onclick="addTransport()">
+							<input type="button" value="Add" class="btn-add" onclick="addHousing()">
 						</div>
 						<div class="pull-right">
 							<input type="button" value="Update Budget" class="btn-expense" onclick="saveDetails()">
@@ -132,7 +146,7 @@
 					</div>
 					<div class="row">
 						<div class="pull-left">
-							<input type="button" value="Add" class="btn-add" onclick="addTransport()">
+							<input type="button" value="Add" class="btn-add" onclick="addFood()">
 						</div>
 						<div class="pull-right">
 							<input type="button" value="Update Budget" class="btn-expense" onclick="saveDetails()">
@@ -141,10 +155,20 @@
 			</div>
 		</div>
 
+		<script>
+			$(document).ready(function () {
+			//   $('.first-button').on('click', function () {
+			//     $('.icon').toggleClass('open');
+			//   });
+			// });
+
+			$('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $('.collapse.in').toggleClass('in');
+		</script>
 
 
 		<script src="main.js"></script>
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 		<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAB1KpV4SyvSzQjPlcJ_lyUKHZ2y10w9xw&libraries=places&callback=initMap"></script> -->
