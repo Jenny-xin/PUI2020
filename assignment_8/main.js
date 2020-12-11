@@ -433,6 +433,9 @@ function addFood() {
 //Edit budget, location, duration
 function saveDetails() {
     var budget = document.getElementById('budgetField').value;
+    if (budget =='') {
+        budget = 0
+    }
     var budgetRemain = document.getElementById('budget-remaining');
     var budgetTotal = document.getElementById('budget-total');
   
@@ -458,20 +461,32 @@ function saveDetails() {
   }
 
   var tripLocation = document.getElementById('pac-input').value;
+  if (tripLocation =='') {
+    tripLocation = "Where will your trip be?"
+    document.getElementById('location').innerHTML = tripLocation;
+  } 
+  else {
   document.getElementById('location').innerHTML = '<span class="text-black">'+ tripLocation + '</span';
+  }
 
   var tripDuration = document.getElementById('durationField').value;
+  if (tripDuration =='') {
+    tripDuration ="When will your trip be?"
+    document.getElementById('duration').innerHTML = tripDuration;
+  }
+  else {
   document.getElementById('duration').innerHTML = '<span class="text-black">' + tripDuration + '</span>';
-
+    }
 }
 
 // save trip info to localStorage
 function saveTrip() {
   var place = autocomplete.getPlace();
   var mapCenter = { 
-        'lat': place?place.geometry.location.lat():40.440624,
-      'lng': place?place.geometry.location.lng():-79.995888,
+    'lat': place?place.geometry.location.lat():40.440624,
+    'lng': place?place.geometry.location.lng():-79.995888,
     }
+    
     var tripLocation = document.getElementById('pac-input').value;
     var tripDuration = document.getElementById('durationField').value;
     
