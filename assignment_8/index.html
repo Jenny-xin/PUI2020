@@ -13,7 +13,7 @@
 
 	<body id="body" onload="loadTrip()">
 
-<!-------------------- Edit Trip Details Popup --------------------->
+<!-- Edit Trip Details Popup -->
 		<div id="editModal" class="modal" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -25,7 +25,7 @@
 					<div class="modal-body"> 
 						<form>
 							<div class="input-container">
-								<label for="budget" class="text-sm-b">Budget Amount</label>
+								<label class="text-sm-b">Budget Amount</label>
 								<div class="input-group">
 									<span class="input-group-addon my-auto">$&nbsp;</span>
 									<input type="text" class="form-control" id="budgetField" value="0">
@@ -33,12 +33,12 @@
 							</div>
 
 							<div class="input-container">
-								<label for="duration" class="text-sm-b">Trip Duration</label>
+								<label class="text-sm-b">Trip Duration</label>
 								<input type="text" class="form-control" id="durationField" placeholder="Trip date(s)">
 							</div>
 
 							<div class="input-container">
-								<label for="location" class="text-sm-b">Location</label>
+								<label class="text-sm-b">Location</label>
 									<div id="pac-container">
 									<input type="text" class="form-control locationField" id="pac-input" placeholder="Where will you go?">
 									</div>
@@ -54,7 +54,7 @@
 				</div>
 			</div>
 		</div>
-<!----------------------- Sidebar -------------------------->
+<!-- Sidebar -->
 		<button class="hamburgerMenu navbar-toggler d-block d-md-none align-top" type="button" data-toggle="collapse" data-target="#sidebar" id="sidebarCollapse" aria-expanded="false">
 			<img src="Assets/Hamburger-menu.png" alt="hamburger menu" class="hamburger-icon img-responsive">
 		</button>
@@ -71,12 +71,12 @@
 				
 				<div class="row justify-content-center">
 					<button type="button" class="btn btn-sm btn-edit text-center" data-toggle="modal" data-target="#editModal">Edit Trip Details</button>
-					<button type="button" class="budget-container btn" data-toggle="modal" data-target="#editModal">
+					<div class="budget-container" data-toggle="modal" data-target="#editModal">
 						<p class="text-center" id="text-white">Budget</p>
 						<p id="budget-remaining" class="text-center text-lg-w">$0</p>
 						<p class="text-sm-w text-center" id="budget-total">/&nbsp;$0</p>
-					</button>
-					<button type="button" class="details-container btn" data-toggle="modal" data-target="#editModal">
+					</div>
+					<div class="details-container" data-toggle="modal" data-target="#editModal">
 						<div id="duration-container">
 							<p class="text-sm-p">Duration</p>
 							<p class="text-gray" id="duration">Trip date(s)</p>
@@ -85,7 +85,7 @@
 							<p class="text-sm-p">Location</p>
 							<p class="text-gray" id="location">Where will you go?</p>
 						</div>
-					</button>
+					</div>
 				</div>
 
 				<div class="row justify-content-center">
@@ -102,7 +102,7 @@
 			</div>
 		</nav>
 
-<!----------------------- Content ------------------------>
+<!-- Content -->
 			<div class="col content">
 					<div class="row" id="transportEl">
 						<p class="text-header">Transportation</p>
@@ -149,7 +149,7 @@
 			</div>
 		</div>
 
-<!------------------- jQuery function for toggling hamburger menu ----------->
+<!-- jQuery function for toggling hamburger menu -->
 		<script>
 			$(document).ready(function () {
 			$('#sidebarCollapse').on('click', function () {
