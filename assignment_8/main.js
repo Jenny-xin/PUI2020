@@ -471,7 +471,7 @@ function saveDetails() {
 
   var tripDuration = document.getElementById('durationField').value;
   if (tripDuration =='') {
-    tripDuration ="When or how long will your trip be?"
+    tripDuration ="Trip date(s)"
     document.getElementById('duration').innerHTML = tripDuration;
   }
   else {
@@ -536,6 +536,8 @@ function saveTrip() {
 }
     var storedTrip = localStorage.setItem('trip', JSON.stringify(trip));
     console.log(trip)
+
+    alert('Your trip is saved. Have a great time!')
 }
 
 //clear localStorage
