@@ -165,7 +165,7 @@ body {
     max-height: 350px;
   }
 
-/* sidebar (left white column) */
+/* sidebar */
 
 #sidebar {
 	margin: 0;
@@ -177,12 +177,8 @@ body {
 	z-index: 10;
 	top: 0;
 	left: 0;
-	transition: all 0.4s;
+	transition: all 0.3s;
 
-}
-
-.no-margin {
-	margin: 0;
 }
 
 .logo {
@@ -249,10 +245,6 @@ body {
 	padding-bottom: 20px;
 }
 
-.col-no-margin {
-	margin: 0;
-}
-
 .text-box {
 	background-color: #F4F5FF;
 	border-radius: 5px;
@@ -291,6 +283,7 @@ body {
 	margin-bottom: 1%;
 }
 
+/* responsive */
 @media (min-width: 768px) {
 	#sidebar {
 		display: block;
@@ -300,11 +293,11 @@ body {
 @media (max-width: 768px) {
 	#sidebar {
 		margin-left: -310px;
+		display: block;
 	}
 
 	#sidebar.active {
 		margin-left: 0;
-		transition: all 0.4s;
 	}
 
 	.content {

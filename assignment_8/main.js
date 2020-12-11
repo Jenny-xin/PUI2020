@@ -1,6 +1,6 @@
 var autocomplete;
 
-//Google Maps section //
+//Google Maps section 
 function initMap() {
   var initialMapCenter =  { lat: 40.440624, lng:  -79.995888};
   var parsedTrip = JSON.parse(localStorage.getItem('trip'));
@@ -62,6 +62,7 @@ function initMap() {
   });
 }
 
+// add transportation container 
 function addTransport() {    
     var parentEl = document.getElementById('transportEl')
 
@@ -185,6 +186,8 @@ function addTransport() {
 
     return transportContainer;
 }
+
+// add housing container 
 
 function addHousing() {
     let parentEl = document.getElementById('housingEl');
@@ -337,6 +340,7 @@ function addHousing() {
     return housingContainer 
 }
 
+// add food / activities container 
 function addFood() {
 
   //food name
@@ -426,7 +430,7 @@ function addFood() {
   return foodContainer
 }
 
-//Edit budget, location, duration//
+//Edit budget, location, duration
 function saveDetails() {
     var budget = document.getElementById('budgetField').value;
     var budgetRemain = document.getElementById('budget-remaining');
@@ -461,6 +465,7 @@ function saveDetails() {
 
 }
 
+// save trip info to localStorage
 function saveTrip() {
   var place = autocomplete.getPlace();
   var mapCenter = { 
