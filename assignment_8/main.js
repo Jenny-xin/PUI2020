@@ -471,7 +471,7 @@ function saveDetails() {
 
   var tripDuration = document.getElementById('durationField').value;
   if (tripDuration =='') {
-    tripDuration ="When will your trip be?"
+    tripDuration ="When or how long will your trip be?"
     document.getElementById('duration').innerHTML = tripDuration;
   }
   else {
@@ -486,7 +486,7 @@ function saveTrip() {
     'lat': place?place.geometry.location.lat():40.440624,
     'lng': place?place.geometry.location.lng():-79.995888,
     }
-    
+
     var tripLocation = document.getElementById('pac-input').value;
     var tripDuration = document.getElementById('durationField').value;
     
